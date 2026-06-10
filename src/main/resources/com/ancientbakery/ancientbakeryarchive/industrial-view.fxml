@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.ancientbakery.ancientbakeryarchive.IndustrialController"
+            stylesheets="@styles.css"
+            styleClass="era-screen"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <VBox layoutY="60" layoutX="20" prefWidth="150" prefHeight="520"
+          spacing="10" alignment="CENTER" styleClass="era-sidebar">
+
+        <Button text="Ancient" styleClass="sidebar-link" onAction="#goAncient"/>
+        <Button text="Medieval" styleClass="sidebar-link" onAction="#goMedieval"/>
+        <Button text="Renaissance" styleClass="sidebar-link" onAction="#goRenaissance"/>
+        <Button text="Industrial" styleClass="sidebar-link" onAction="#goIndustrial"/>
+        <Button text="20th Century" styleClass="sidebar-link" onAction="#go20thCent"/>
+        <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
+
+        <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
+
+    </VBox>
+
+    <TabPane layoutX="185" layoutY="20" prefWidth="595" prefHeight="560"
+             tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
+
+        <Tab text="RECIPES">
+            <VBox styleClass="parchment-industrial" alignment="TOP_CENTER" spacing="20">
+                <padding><Insets top="35"/></padding>
+            </VBox>
+        </Tab>
+
+        <Tab text="PICTURES">
+            <StackPane styleClass="parchment-industrial">
+                <Label text="Pictures coming soon" styleClass="recipe-title"/>
+            </StackPane>
+        </Tab>
+
+        <Tab text="HISTORY">
+            <StackPane styleClass="parchment-industrial">
+                <Label text="History coming soon" styleClass="recipe-title"/>
+            </StackPane>
+        </Tab>
+
+        <Tab text="POPULAR">
+            <StackPane styleClass="parchment-industrial">
+                <Label text="Popular coming soon" styleClass="recipe-title"/>
+            </StackPane>
+        </Tab>
+    </TabPane>
+</AnchorPane>
