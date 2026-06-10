@@ -32,11 +32,12 @@ public class Era {
     public void setTimePeriod(String timePeriod) {
         this.timePeriod = timePeriod;
     }
-}
-public String getHistoryText() {
-    return historyText;
-}
 
-public void setHistoryText(String historyText) {
-    this.historyText = historyText;
+    public String getHistoryText() {
+        return historyText;
+    }
+
+    public void setHistoryText(String historyText) {
+        this.historyText = historyText;
+    }
 }
