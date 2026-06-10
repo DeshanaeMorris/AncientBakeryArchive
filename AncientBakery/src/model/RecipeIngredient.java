@@ -1,6 +1,7 @@
 package model;
 
 public class RecipeIngredient {
+    private int id;
     private int recipeId;
     private int ingredientId;
     private double quantity;
@@ -9,6 +10,12 @@ public class RecipeIngredient {
     public RecipeIngredient() {
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getRecipeId() {
         return recipeId;
     }
