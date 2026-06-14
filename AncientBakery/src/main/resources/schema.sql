@@ -17,7 +17,7 @@ CREATE TABLE Eras (
 --Ingredients Table
 CREATE TABLE Ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR NOT NULL UNIQUE,
+    name VARCHAR NOT NULL,
     category VARCHAR NOT NULL
 );
 
