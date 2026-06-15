@@ -8,14 +8,14 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.ancientbakery.ancientbakeryarchive.ContentsController"
-            stylesheets="@styles.css"
+            stylesheets="@../styles.css"
             styleClass="contents-screen"
             prefHeight="600.0" prefWidth="800.0">
 
     <VBox alignment="TOP_CENTER" spacing="15" layoutY="20" layoutX="100" prefWidth="600">
 
         <ImageView fitWidth="420" preserveRatio="true">
-            <Image url="@images/table_title.png"/>
+            <Image url="@../images/table_title.png"/>
         </ImageView>
 
         <VBox spacing="14" alignment="CENTER" styleClass="contents-card"

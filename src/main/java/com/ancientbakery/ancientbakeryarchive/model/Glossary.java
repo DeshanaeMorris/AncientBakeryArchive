@@ -1,4 +1,4 @@
-package model;
+package com.ancientbakery.ancientbakeryarchive.model;
 
 public class Glossary {
     private int id;
