@@ -6,3 +6,7 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+*.iml
+dataSources/
+.idea/sqldialects.xml
+.idea/data_source_mapping.xml
