@@ -7,5 +7,3 @@ INSERT INTO Eras (id, name, time_period, History_text) VALUES
     (5, '20th Century', '1900 AD - 2000 AD', 'The era of convenience, pre-packaged baking mixes, and global standardization. High-speed commercial mixers, electric ovens, sliced sandwich bread, and optimized instant yeast strains transformed baking from a grueling daily chore into an efficient science.'),
     (6, 'Modern', '2000 AD - Present', 'A diverse landscape combining rapid technological innovation with historical revival. Contemporary baking features advanced tools like digital scales, sourdough preservation movements, gluten-free grain alternatives, and global recipe sharing via digital archives.');
 
-
-
