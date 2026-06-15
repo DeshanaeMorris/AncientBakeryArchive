@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.geometry.Insets?>
-<StackPane prefHeight="600" prefWidth="800" styleClass="start-screen" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ancientbakery.ancientbakeryarchive.StartController">
+<StackPane prefHeight="600" prefWidth="800" styleClass="start-screen" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ancientbakery.ancientbakeryarchive.StartController">
     <VBox alignment="CENTER" spacing="60" maxWidth="560" maxHeight="420" styleClass="welcome-card">
         <padding>
             <Insets top="40" right="50" bottom="40" left="50"/>
         </padding>
 
         <ImageView fx:id="titleImageView" fitWidth="400" preserveRatio="true">
-            <Image url="@images/title.png" />
+            <Image url="@../images/title.png" />
         </ImageView>
 
         <Button fx:id="welcomeButton" onAction="#onWelcomeClick" prefHeight="70" prefWidth="190" styleClass="welcome-button" text="WELCOME!" />

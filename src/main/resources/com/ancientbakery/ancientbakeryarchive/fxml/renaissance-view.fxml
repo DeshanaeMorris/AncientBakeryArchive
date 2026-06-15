@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ancientbakery.ancientbakeryarchive.IndustrialController"
-            stylesheets="@styles.css"
+            fx:controller="com.ancientbakery.ancientbakeryarchive.RenaissanceController"
+            stylesheets="@../styles.css"
             styleClass="era-screen"
             prefHeight="600.0" prefWidth="800.0">
 
@@ -29,27 +30,28 @@
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
-            <VBox styleClass="parchment-industrial" alignment="TOP_CENTER" spacing="20">
+            <VBox styleClass="parchment-renaissance" alignment="TOP_CENTER" spacing="20">
                 <padding><Insets top="35"/></padding>
             </VBox>
         </Tab>
 
         <Tab text="PICTURES">
-            <StackPane styleClass="parchment-industrial">
+            <StackPane styleClass="parchment-renaissance">
                 <Label text="Pictures coming soon" styleClass="recipe-title"/>
             </StackPane>
         </Tab>
 
         <Tab text="HISTORY">
-            <StackPane styleClass="parchment-industrial">
+            <StackPane styleClass="parchment-renaissance">
                 <Label text="History coming soon" styleClass="recipe-title"/>
             </StackPane>
         </Tab>
 
         <Tab text="POPULAR">
-            <StackPane styleClass="parchment-industrial">
+            <StackPane styleClass="parchment-renaissance">
                 <Label text="Popular coming soon" styleClass="recipe-title"/>
             </StackPane>
         </Tab>
     </TabPane>
+
 </AnchorPane>
