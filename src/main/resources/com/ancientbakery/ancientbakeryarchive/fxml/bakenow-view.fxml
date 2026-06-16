@@ -56,7 +56,7 @@
 
                 <HBox spacing="10" alignment="TOP_CENTER">
                     <VBox spacing="4" HBox.hgrow="ALWAYS">
-                        <Label text="Historical Recipe" styleClass="recipe-subtitle"/>
+                        <Label text="Original Recipe" styleClass="recipe-subtitle"/>
                         <TextArea fx:id="historicalRecipeText" prefWidth="270" prefHeight="310"
                                   wrapText="true" editable="false" styleClass="recipe-output-area"/>
                     </VBox>

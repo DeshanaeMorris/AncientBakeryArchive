@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class BakeController extends BaseNavigator {
     private static final String ORIGINAL_UNITS = "Original Units";
     private static final String IMPERIAL_UNITS = "Imperial";
+    private static final String METRIC_UNITS = "Metric";
 
     @FXML private Label selectedRecipeLabel;
     @FXML private Label statusLabel;
@@ -33,7 +34,7 @@ public class BakeController extends BaseNavigator {
     @FXML
     public void initialize() {
         multiplierField.setText("1");
-        unitSystemBox.getItems().setAll(ORIGINAL_UNITS, IMPERIAL_UNITS);
+        unitSystemBox.getItems().setAll(ORIGINAL_UNITS, IMPERIAL_UNITS, METRIC_UNITS);
         unitSystemBox.setValue(ORIGINAL_UNITS);
         unitSystemBox.setOnAction(event -> refreshRecipeDisplays());
 
@@ -76,43 +77,45 @@ public class BakeController extends BaseNavigator {
 
         try {
             double multiplier = parsePositiveNumber(multiplierField.getText());
-            boolean useImperial = IMPERIAL_UNITS.equals(unitSystemBox.getValue());
+            String unitSystem = getSelectedUnitSystem();
 
             historicalRecipeText.setText(buildHistoricalRecipeText());
-            modernRecipeText.setText(buildModernRecipeText(multiplier, useImperial));
-
-            statusLabel.setText(useImperial
-                    ? "Modernized output updated with imperial units and portion scaling."
-                    : "Modernized output updated with original units and portion scaling.");
+            modernRecipeText.setText(buildModernRecipeText(multiplier, unitSystem));
+            statusLabel.setText("");
         } catch (IllegalArgumentException e) {
             statusLabel.setText(e.getMessage());
         }
     }
 
     private String buildHistoricalRecipeText() {
-        return "Historical Recipe\n" +
+        return "Original Recipe\n" +
                 "-----------------\n" +
                 selectedRecipe.getName() + "\n\n" +
                 "Source: " + safeText(selectedRecipe.getSource(), "Not listed") + "\n" +
                 "Base portion: " + selectedRecipe.getBasePortion() + "\n" +
-                "Historical temperature: " + safeText(selectedRecipe.getTemperatureDescription(), "Not listed") + "\n\n" +
+                "Original temperature: " + safeText(selectedRecipe.getTemperatureDescription(), "Not listed") + "\n\n" +
                 "Ingredients:\n" + formatOriginalIngredients() + "\n\n" +
-                "Original Historical Text:\n" + safeText(selectedRecipe.getOriginalText(), "Not available");
+                "Original Recipe Text:\n" + safeText(selectedRecipe.getOriginalText(), "Not available");
     }
 
-    private String buildModernRecipeText(double multiplier, boolean useImperial) {
-        String unitLabel = useImperial ? IMPERIAL_UNITS : ORIGINAL_UNITS;
+    private String buildModernRecipeText(double multiplier, String unitSystem) {
+        boolean useImperial = IMPERIAL_UNITS.equals(unitSystem);
 
         return "Modernized Recipe\n" +
                 "-----------------\n" +
                 selectedRecipe.getName() + "\n\n" +
-                "Portion multiplier: " + format(multiplier) + "\n" +
-                "Units: " + unitLabel + "\n" +
-                "Modernized temperature: " +
-                formatModernTemperature(selectedRecipe.getTemperatureDescription(), useImperial) + "\n" +
-                "Modernized Ingredients:\n" + formatModernIngredients(multiplier, useImperial) + "\n\n" +
-                "Modernized Instructions:\n" +
-                formatModernizedInstructions(selectedRecipe.getModernizedText(), useImperial);
+                "Portion multiplier: " + format(multiplier) + "\n\n" +
+                "Units: " + unitSystem + "\n\n" +
+                "Modernized temperature: " + formatModernTemperature(selectedRecipe.getTemperatureDescription(), useImperial) + "\n\n" +
+                "Modernized Ingredients:\n" + formatModernIngredients(multiplier, unitSystem) + "\n\n" +
+                "Modernized Instructions:\n" + formatModernizedInstructions(selectedRecipe.getModernizedText(), useImperial);
+    }
+
+    private String getSelectedUnitSystem() {
+        if (unitSystemBox == null || unitSystemBox.getValue() == null) {
+            return ORIGINAL_UNITS;
+        }
+        return unitSystemBox.getValue();
     }
 
     private String formatOriginalIngredients() {
@@ -126,8 +129,8 @@ public class BakeController extends BaseNavigator {
                 .collect(Collectors.joining("\n"));
     }
 
-    private String formatModernIngredients(double multiplier, boolean useImperial) {
-        if (selectedIngredients.isEmpty()) {
+    private String formatModernIngredients(double multiplier, String unitSystem) {
+        if (selectedIngredients == null || selectedIngredients.isEmpty()) {
             return "No ingredients listed.";
         }
 
@@ -135,9 +138,18 @@ public class BakeController extends BaseNavigator {
                 .map(ingredient -> {
                     double amount = RecipeScaler.scaleAmount(ingredient.getQuantity(), multiplier);
 
-                    if (useImperial) {
+                    if (IMPERIAL_UNITS.equals(unitSystem)) {
                         UnitConverter.ConvertedMeasurement converted =
                                 UnitConverter.toImperial(amount, ingredient.getUnit());
+
+                        return "• " + ingredient.getIngredientName() + " — " +
+                                format(converted.amount()) + " " + converted.unit();
+                    }
+
+                    if (METRIC_UNITS.equals(unitSystem)) {
+                        UnitConverter.ConvertedMeasurement converted =
+                                UnitConverter.toMetric(amount, ingredient.getUnit());
+
                         return "• " + ingredient.getIngredientName() + " — " +
                                 format(converted.amount()) + " " + converted.unit();
                     }

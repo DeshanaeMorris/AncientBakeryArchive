@@ -92,7 +92,7 @@ public abstract class EraRecipeController extends BaseNavigator {
         title.setWrapText(true);
         title.setMaxWidth(350);
 
-        Label historicalHeader = new Label("Historical Text:");
+        Label historicalHeader = new Label("Original Text:");
         historicalHeader.getStyleClass().add("recipe-meta");
 
         Label historicalText = new Label(safeText(recipe.getOriginalText(), "Not available"));
