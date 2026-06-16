@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("start-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/ancientbakery/ancientbakeryarchive/fxml/start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Ancient Bakery Archive");
         stage.setScene(scene);

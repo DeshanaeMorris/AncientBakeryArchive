@@ -18,7 +18,7 @@ public class StartController {
         try {
             // Table of Contents page
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("contents-view.fxml"));
+                    getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/contents-view.fxml"));
             Parent root = loader.load();
 
             // Get the current stage and set the new scene

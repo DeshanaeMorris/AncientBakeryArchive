@@ -15,7 +15,7 @@ public class century20thController {
     public void goAncient(ActionEvent event) {
         try {
             System.out.println("Ancient clicked!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ancient-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/ancient-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -33,7 +33,7 @@ public class century20thController {
     public void goMedieval(ActionEvent event) {
         try {
             System.out.println("Medieval clicked!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("medieval-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/medieval-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -51,7 +51,7 @@ public class century20thController {
     public void goRenaissance(ActionEvent event) {
         try {
             System.out.println("Renaissance clicked!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("renaissance-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/renaissance-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -69,7 +69,7 @@ public class century20thController {
     public void goIndustrial(ActionEvent event) {
         try {
             System.out.println("Industrial clicked!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("industrial-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/industrial-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -92,7 +92,7 @@ public class century20thController {
     public void goModern(ActionEvent event) {
         try {
             System.out.println("Modern clicked!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("modern-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/modern-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -110,7 +110,7 @@ public class century20thController {
     public void goBakeNow(ActionEvent event) {
         try {
             System.out.println("Bake Now clicked!");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("bakenow-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/bakenow-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
