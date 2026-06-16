@@ -37,26 +37,37 @@
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
-            <HBox>
-                <!-- Recipe parchment (left, wider) -->
-                <VBox styleClass="parchment-ancient" alignment="TOP_CENTER" spacing="20"
-                      prefWidth="395" HBox.hgrow="ALWAYS">
-                    <padding><Insets top="35"/></padding>
-                    <ImageView fitWidth="320" preserveRatio="true">
-                        <Image url="@../images/RandAncient.png"/>
-                    </ImageView>
-                </VBox>
+            <VBox styleClass="conversions-panel" spacing="8" alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="18" right="14" bottom="14" left="14"/>
+                </padding>
 
-                <!-- Conversions panel (right, scrollable) -->
-                <ScrollPane prefWidth="200" fitToWidth="true" styleClass="conversions-scroll">
-                    <VBox alignment="TOP_CENTER" spacing="15" styleClass="conversions-panel">
-                        <padding><Insets top="25" right="15" bottom="25" left="15"/></padding>
-                        <Label text="Updated Conversions" wrapText="true"
-                               styleClass="conversions-title"/>
-                        <!-- conversion entries will go here -->
+                <Label text="Bake Now - Selected Recipe Conversion" styleClass="recipe-title-small"/>
+                <Label fx:id="selectedRecipeLabel" styleClass="recipe-subtitle"/>
+                <Label fx:id="statusLabel" styleClass="recipe-instruction" wrapText="true"/>
+
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="Portion multiplier:"/>
+                    <TextField fx:id="multiplierField" prefWidth="90"/>
+                    <Label text="Units:"/>
+                    <ComboBox fx:id="unitSystemBox" prefWidth="150"/>
+                    <Button text="Update Modern Version" onAction="#updateModernRecipe"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="TOP_CENTER">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Historical Recipe" styleClass="recipe-subtitle"/>
+                        <TextArea fx:id="historicalRecipeText" prefWidth="270" prefHeight="310"
+                                  wrapText="true" editable="false" styleClass="recipe-output-area"/>
                     </VBox>
-                </ScrollPane>
-            </HBox>
+
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Modernized Recipe Output" styleClass="recipe-subtitle"/>
+                        <TextArea fx:id="modernRecipeText" prefWidth="270" prefHeight="310"
+                                  wrapText="true" editable="false" styleClass="recipe-output-area"/>
+                    </VBox>
+                </HBox>
+            </VBox>
         </Tab>
 
         <Tab text="PICTURES">
