@@ -4,6 +4,7 @@ import com.ancientbakery.ancientbakeryarchive.features.RecipeScaler;
 import com.ancientbakery.ancientbakeryarchive.features.UnitConverter;
 import com.ancientbakery.ancientbakeryarchive.model.Recipe;
 import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -215,5 +216,10 @@ public class BakeController extends BaseNavigator {
 
     private String safeText(String value, String fallback) {
         return value == null || value.isBlank() ? fallback : value;
+    }
+
+    @FXML
+    private void goToContents(ActionEvent event) {
+        goTo(event, "contents-view.fxml");
     }
 }
