@@ -183,3 +183,115 @@
     -fx-text-fill: #2b1d12;
     -fx-text-alignment: center;
 }
+
+
+/* Recipe tab database cards and Bake Now output */
+.recipe-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.recipe-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.recipe-cards-content {
+    -fx-background-color: transparent;
+    -fx-alignment: top-center;
+}
+
+.era-intro-overlay {
+    -fx-background-color: #efe3bf;
+    -fx-background-radius: 10;
+    -fx-border-color: #6e4f2f;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.4;
+}
+
+.era-intro-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.era-intro-dates {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a3423;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.recipe-card {
+    -fx-background-color: rgba(255, 248, 224, 0.90);
+    -fx-background-radius: 12;
+    -fx-border-color: #6e4f2f;
+    -fx-border-radius: 12;
+    -fx-border-width: 1.5;
+    -fx-pref-width: 380;
+    -fx-max-width: 380;
+}
+
+.recipe-card:hover {
+    -fx-background-color: rgba(255, 248, 224, 0.98);
+    -fx-cursor: hand;
+}
+
+.recipe-card-selected {
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
+
+.recipe-card-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+}
+
+.recipe-meta {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3a2a1c;
+}
+
+.recipe-body {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 12px;
+    -fx-text-fill: #2b1d12;
+    -fx-line-spacing: 1.5;
+}
+
+.recipe-title-small {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+}
+
+.recipe-subtitle {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a3423;
+}
+
+.recipe-instruction {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+    -fx-text-fill: #5a3d28;
+}
+
+.recipe-output-area {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 12px;
+    -fx-control-inner-background: rgba(255, 248, 224, 0.90);
+    -fx-text-fill: #2b1d12;
+}

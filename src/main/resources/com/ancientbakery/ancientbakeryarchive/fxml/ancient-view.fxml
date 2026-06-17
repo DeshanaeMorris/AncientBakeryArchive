@@ -33,23 +33,28 @@
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
-            <VBox styleClass="parchment-ancient" alignment="TOP_CENTER" spacing="15" pickOnBounds="false">
-                <padding><Insets top="25" right="20" left="20" bottom="20"/></padding>
-
-                <ListView fx:id="recipeListView" prefHeight="120.0" prefWidth="Infinity" onMouseClicked="#handleRecipeClick"/>
-
-                <VBox fx:id="recipeDetailPane" spacing="8" alignment="TOP_LEFT" visible="false">
-                    <Label fx:id="recipeNameLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #4a2c11;"/>
-                    <Label fx:id="recipeSourceLabel" style="-fx-font-style: italic; -fx-text-fill: #6e4720;"/>
-                    <Label fx:id="recipeTempLabel" style="-fx-text-fill: #4a2c11;"/>
-
-                    <Label text="Original Text:" style="-fx-font-weight: bold; -fx-text-fill: #4a2c11;"/>
-                    <Label fx:id="recipeOriginalLabel" wrapText="true" style="-fx-text-fill: #5c4028;"/>
-
-                    <Label text="Modern Method (Available in BAKE NOW):" style="-fx-font-weight: bold; -fx-text-fill: #4a2c11;"/>
-                    <Label fx:id="recipeModernLabel" wrapText="true" style="-fx-text-fill: #5c4028;"/>
+            <StackPane alignment="CENTER" styleClass="parchment-ancient">
+                <VBox fx:id="eraTitleBox" alignment="CENTER" prefWidth="430" maxWidth="430"
+                      prefHeight="104" maxHeight="104" spacing="4"
+                      styleClass="era-intro-overlay"
+                      StackPane.alignment="TOP_CENTER" translateY="62">
+                    <padding>
+                        <Insets top="12" right="18" bottom="12" left="18"/>
+                    </padding>
                 </VBox>
-            </VBox>
+
+                <ScrollPane prefWidth="470" prefHeight="315" maxWidth="470" maxHeight="315"
+                            fitToWidth="true" styleClass="recipe-scroll"
+                            hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                            StackPane.alignment="BOTTOM_CENTER">
+                    <VBox fx:id="recipeCardsBox" alignment="TOP_CENTER" prefWidth="450"
+                          maxWidth="450" styleClass="recipe-cards-content" spacing="10">
+                        <padding>
+                            <Insets top="8" right="20" bottom="28" left="20"/>
+                        </padding>
+                    </VBox>
+                </ScrollPane>
+            </StackPane>
         </Tab>
 
         <Tab text="PICTURES">

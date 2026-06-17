@@ -28,9 +28,28 @@
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
-            <VBox styleClass="parchment-20thCent" alignment="TOP_CENTER" spacing="20">
-                <padding><Insets top="35"/></padding>
-            </VBox>
+            <StackPane alignment="CENTER" styleClass="parchment-20thCent">
+                <VBox fx:id="eraTitleBox" alignment="CENTER" prefWidth="430" maxWidth="430"
+                      prefHeight="104" maxHeight="104" spacing="4"
+                      styleClass="era-intro-overlay"
+                      StackPane.alignment="TOP_CENTER" translateY="62">
+                    <padding>
+                        <Insets top="12" right="18" bottom="12" left="18"/>
+                    </padding>
+                </VBox>
+
+                <ScrollPane prefWidth="470" prefHeight="315" maxWidth="470" maxHeight="315"
+                            fitToWidth="true" styleClass="recipe-scroll"
+                            hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                            StackPane.alignment="BOTTOM_CENTER">
+                    <VBox fx:id="recipeCardsBox" alignment="TOP_CENTER" prefWidth="450"
+                          maxWidth="450" styleClass="recipe-cards-content" spacing="10">
+                        <padding>
+                            <Insets top="8" right="20" bottom="28" left="20"/>
+                        </padding>
+                    </VBox>
+                </ScrollPane>
+            </StackPane>
         </Tab>
 
         <Tab text="PICTURES">
