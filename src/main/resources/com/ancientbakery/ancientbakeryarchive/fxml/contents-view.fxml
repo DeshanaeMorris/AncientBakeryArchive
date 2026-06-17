@@ -40,6 +40,9 @@
             <Button fx:id="modernButton" text="MODERN" styleClass="contents-link"
                     prefWidth="280" prefHeight="50" onAction="#goModern"/>
 
+            <Button fx:id="pantryButton" text="PANTRY MATCHER" styleClass="contents-link"
+                    prefWidth="280" prefHeight="50" onAction="#goToPantry"/>
+
         </VBox>
     </VBox>
 
