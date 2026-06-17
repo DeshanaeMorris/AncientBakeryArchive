@@ -30,6 +30,8 @@
 
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
 
+        <Button text="Go Back" styleClass="sidebar-link" onAction="#goToContents"/>
+
     </VBox>
 
     <!-- Tabs over split content: recipe parchment + conversions panel -->

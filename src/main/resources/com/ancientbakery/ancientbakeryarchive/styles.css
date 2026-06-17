@@ -295,3 +295,94 @@
     -fx-control-inner-background: rgba(255, 248, 224, 0.90);
     -fx-text-fill: #2b1d12;
 }
+
+.pantry-screen{
+        -fx-background-color: #e5d2aa;
+        -fx-background-image: url('images/background.png');
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+}
+
+.pantry-sidebar{
+    -fx-background-color: #aea18d;
+    -fx-spacing: 10px;
+}
+
+.sidebar-title{
+    -fx-font-family: "Georgia";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+}
+
+.sidebar-subtitle {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 12px;
+    -fx-text-fill: #3a2a1c;
+}
+
+.ingredient-cb{
+    -fx-font-family: "Georgia";
+    -fx-font-size: 13px;
+    -fx-text-fill: #2b1d12;
+}
+.match-badge {
+    -fx-background-color: #2e2118;
+    -fx-text-fill: #e8d5a3;
+    -fx-padding: 4px 12px;
+    -fx-background-radius: 20;
+    -fx-font-size: 12px;
+    -fx-font-family: "Georgia";
+}
+
+.card-era {
+    -fx-font-family: "Georgia";
+    -fx-background-color: rgba(255, 248, 224, 0.90);
+    -fx-font-size: 10px;
+    -fx-text-fill: #6e4f2f;
+    -fx-font-weight: bold;
+}
+
+.search-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2b1d12;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #6e4f2f;
+    -fx-border-color: #6e4f2f;
+    -fx-border-width: 0 0 1.5 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 4 4 4 26;
+}
+
+.search-icon {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6e4f2f;
+}
+
+.search-results {
+    -fx-background-color: #f7f1e3;
+    -fx-border-color: #6e4f2f;
+    -fx-border-width: 1.5;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.search-results .list-cell {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-text-fill: #2b1d12;
+    -fx-background-color: transparent;
+    -fx-padding: 8 12 8 12;
+}
+
+.search-results .list-cell:filled:hover {
+    -fx-background-color: rgba(110, 79, 47, 0.15);
+}
+
+.search-results .list-cell:filled:selected {
+    -fx-background-color: rgba(110, 79, 47, 0.3);
+    -fx-text-fill: #2b1d12;
+}
