@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ancientbakery.ancientbakeryarchive.PantryMatcherController"
+      stylesheets="@../styles.css"
+      styleClass="pantry-screen"
+      prefHeight="600.0" prefWidth="800.0">
+
+    <!-- Left Sidebar: Ingredient Checklist -->
+    <VBox layoutY="60" layoutX="20" prefWidth="150" prefHeight="520"
+          spacing="10" alignment="TOP_CENTER" styleClass="era-sidebar">
+
+        <Label text="Your Pantry" styleClass="sidebar-title"/>
+        <Label text="Check what you have:" styleClass="sidebar-subtitle"/>
+
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" prefHeight="380">
+            <VBox fx:id="ingredientCheckboxPane" spacing="6">
+                <padding>
+                    <Insets top="8" right="8" bottom="8" left="8"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+
+        <Button text="Clear All" styleClass="sidebar-link"
+                onAction="#handleClear"/>
+        <Button text="Go Back" styleClass="sidebar-link"
+                onAction="#goToContents"/>
+    </VBox>
+
+    <!-- Main Content -->
+    <TabPane layoutX="185" layoutY="20" prefWidth="595" prefHeight="560"
+             tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
+
+        <Tab text="RECIPES">
+            <VBox styleClass="conversions-panel" spacing="8" alignment="TOP_LEFT">
+                <padding>
+                    <Insets top="18" right="14" bottom="14" left="14"/>
+                </padding>
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label text="Recipes You Can Make"
+                           styleClass="recipe-title-small"
+                           HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="matchCountLabel" text="0 matches"
+                           styleClass="match-badge"/>
+                </HBox>
+
+                <Label text="Select ingredients from the sidebar to find matching recipes."
+                       styleClass="recipe-instruction"/>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                    <FlowPane fx:id="recipeResultsPane" hgap="12" vgap="12"
+                              prefWrapLength="500">
+                        <padding>
+                            <Insets top="8" right="8" bottom="8" left="8"/>
+                        </padding>
+                    </FlowPane>
+                </ScrollPane>
+            </VBox>
+        </Tab>
+
+    </TabPane>
+
+
+</AnchorPane>
