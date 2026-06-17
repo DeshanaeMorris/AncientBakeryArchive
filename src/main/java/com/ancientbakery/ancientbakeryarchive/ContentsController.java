@@ -119,4 +119,22 @@ public class ContentsController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void goToPantry(ActionEvent event) {
+        try {
+            System.out.println("Pantry clicked!");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ancientbakery/ancientbakeryarchive/fxml/pantry-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e){
+            System.out.println("Error loading Pantry Matcher: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
