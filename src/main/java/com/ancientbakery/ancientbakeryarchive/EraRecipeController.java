@@ -47,12 +47,12 @@ public abstract class EraRecipeController extends BaseNavigator {
         Label title = new Label(eraName + " Recipes");
         title.getStyleClass().add("era-intro-title");
         title.setWrapText(true);
-        title.setMaxWidth(340);
+        title.setMaxWidth(480);
 
         Label dates = new Label(timePeriod);
         dates.getStyleClass().add("era-intro-dates");
         dates.setWrapText(true);
-        dates.setMaxWidth(340);
+        dates.setMaxWidth(480);
         dates.setVisible(!timePeriod.isBlank());
         dates.setManaged(!timePeriod.isBlank());
 
@@ -70,27 +70,40 @@ public abstract class EraRecipeController extends BaseNavigator {
         if (recipes.isEmpty()) {
             Label emptyMessage = new Label("No recipes have been added for this era yet.");
             emptyMessage.getStyleClass().add("recipe-card");
-            emptyMessage.setPadding(new Insets(10));
+            emptyMessage.setPadding(new Insets(16));
             emptyMessage.setWrapText(true);
             recipeCardsBox.getChildren().add(emptyMessage);
             return;
         }
 
+        VBox firstCard = null;
+        Recipe firstRecipe = null;
+
         for (Recipe recipe : recipes) {
-            recipeCardsBox.getChildren().add(createRecipeCard(recipe));
+            VBox card = createRecipeCard(recipe);
+            if (firstCard == null) {
+                firstCard = card;
+                firstRecipe = recipe;
+            }
+            recipeCardsBox.getChildren().add(card);
+        }
+
+        if (firstCard != null && firstRecipe != null) {
+            selectRecipe(firstRecipe, firstCard);
         }
     }
 
     private VBox createRecipeCard(Recipe recipe) {
-        VBox card = new VBox(7);
-        card.setPadding(new Insets(10));
+        VBox card = new VBox(8);
+        card.setPadding(new Insets(14));
         card.getStyleClass().add("recipe-card");
-        card.setMaxWidth(380);
+        card.setPrefWidth(560);
+        card.setMaxWidth(760);
 
-        Label title = new Label(recipe.getName());
+        Label title = new Label(safeText(recipe.getName(), "Untitled Recipe"));
         title.getStyleClass().add("recipe-card-title");
         title.setWrapText(true);
-        title.setMaxWidth(350);
+        title.setMaxWidth(720);
 
         Label historicalHeader = new Label("Original Text:");
         historicalHeader.getStyleClass().add("recipe-meta");
@@ -98,7 +111,7 @@ public abstract class EraRecipeController extends BaseNavigator {
         Label historicalText = new Label(safeText(recipe.getOriginalText(), "Not available"));
         historicalText.getStyleClass().add("recipe-body");
         historicalText.setWrapText(true);
-        historicalText.setMaxWidth(350);
+        historicalText.setMaxWidth(720);
 
         Label ingredientsHeader = new Label("Ingredients:");
         ingredientsHeader.getStyleClass().add("recipe-meta");
@@ -106,7 +119,7 @@ public abstract class EraRecipeController extends BaseNavigator {
         Label ingredients = new Label(formatIngredients(recipe.getId()));
         ingredients.getStyleClass().add("recipe-body");
         ingredients.setWrapText(true);
-        ingredients.setMaxWidth(350);
+        ingredients.setMaxWidth(720);
 
         card.setOnMouseClicked(event -> selectRecipe(recipe, card));
         card.getChildren().addAll(title, historicalHeader, historicalText, ingredientsHeader, ingredients);

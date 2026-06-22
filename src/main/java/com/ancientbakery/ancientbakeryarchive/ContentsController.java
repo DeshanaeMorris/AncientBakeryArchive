@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -30,10 +29,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading Ancient: " + e.getMessage());
             e.printStackTrace();
@@ -48,10 +44,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading Medieval: " + e.getMessage());
             e.printStackTrace();
@@ -66,10 +59,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading Renaissance: " + e.getMessage());
             e.printStackTrace();
@@ -84,10 +74,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading Industrial: " + e.getMessage());
             e.printStackTrace();
@@ -102,10 +89,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading 20th Century: " + e.getMessage());
             e.printStackTrace();
@@ -120,10 +104,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading Modern: " + e.getMessage());
             e.printStackTrace();
@@ -138,10 +119,7 @@ public class ContentsController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e){
             System.out.println("Error loading Pantry Matcher: " + e.getMessage());
             e.printStackTrace();
@@ -261,8 +239,7 @@ public class ContentsController {
                     "/com/ancientbakery/ancientbakeryarchive/fxml/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            BaseNavigator.setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.out.println("Error navigating to recipe era: " + e.getMessage());
             e.printStackTrace();

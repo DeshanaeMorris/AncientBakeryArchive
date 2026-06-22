@@ -10,14 +10,34 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BaseNavigator {
+    private static final double DEFAULT_WIDTH = 800;
+    private static final double DEFAULT_HEIGHT = 600;
+
+    public static void setResponsiveScene(Stage stage, Parent root) {
+        Scene currentScene = stage.getScene();
+        double width = currentScene != null && currentScene.getWidth() > 0
+                ? currentScene.getWidth()
+                : DEFAULT_WIDTH;
+        double height = currentScene != null && currentScene.getHeight() > 0
+                ? currentScene.getHeight()
+                : DEFAULT_HEIGHT;
+
+        boolean wasMaximized = stage.isMaximized();
+        boolean wasFullScreen = stage.isFullScreen();
+
+        stage.setScene(new Scene(root, width, height));
+        stage.setMaximized(wasMaximized);
+        stage.setFullScreen(wasFullScreen);
+        stage.show();
+    }
+
     protected void goTo(ActionEvent event, String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
                     "/com/ancientbakery/ancientbakeryarchive/fxml/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            setResponsiveScene(stage, root);
         } catch (IOException e) {
             System.err.println("Error loading " + fxmlFile + ": " + e.getMessage());
             e.printStackTrace();
