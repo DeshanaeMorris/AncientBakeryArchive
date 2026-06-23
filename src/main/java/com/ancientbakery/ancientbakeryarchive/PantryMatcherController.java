@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -105,6 +107,28 @@ public class PantryMatcherController extends BaseNavigator {
                     count++;
                 }
                 matchCountLabel.setText(count + (count == 1 ? " match" : " matches"));
+
+                if (count == 0){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("No Matches");
+                    alert.setHeaderText(null);
+                    alert.setContentText("None of the selected ingredients match a recipe in the archive. Try again.");
+                    alert.setGraphic(null);
+
+                    alert.getDialogPane().setStyle("-fx-background-color: #f7f1e3; -fx-font-family: 'Georgia';");
+
+                    Label contentLabel = (Label) alert.getDialogPane().lookup(".content.label");
+                    if (contentLabel != null) {
+                        contentLabel.setStyle("-fx-font-family: 'Georgia'; -fx-font-size: 14px; -fx-text-fill: #2b1d12;");
+                    }
+
+                    alert.getDialogPane().getButtonTypes().forEach(type -> {
+                        var button = alert.getDialogPane().lookupButton(type);
+                        button.setStyle("-fx-background-color: #271d15; -fx-text-fill: white; -fx-font-family: 'Georgia'; -fx-background-radius: 6;");
+                    });
+
+                    alert.showAndWait();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

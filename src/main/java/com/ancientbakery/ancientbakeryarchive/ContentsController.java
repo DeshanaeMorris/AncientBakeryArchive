@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -136,11 +139,7 @@ public class ContentsController {
 
     @FXML
     private void handleSearch(ActionEvent event) {
-        System.out.println("handleSearch triggered, searchResultsList is: " + searchResultsList);
-
         String query = searchField.getText().trim().toLowerCase();
-
-        System.out.println("Searching for: " + query);
 
         if (query.isEmpty()) {
             searchResultsList.setVisible(false);
@@ -166,7 +165,6 @@ public class ContentsController {
         ORDER BY e.name, r.name
         """;
 
-        System.out.println("Generated SQL: " + sql);
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -197,7 +195,25 @@ public class ContentsController {
             searchResultsList.setManaged(hasResults);
 
             if (!hasResults) {
-                searchResultsList.getItems().add("No results found.");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Matches");
+                alert.setHeaderText(null);
+                alert.setContentText("No recipes, eras, or ingredients matched \"" + query + "\". ");
+                alert.setGraphic(null);
+
+                alert.getDialogPane().setStyle("-fx-background-color: #f7f1e3; -fx-font-family: 'Georgia';");
+
+                Label contentLabel = (Label) alert.getDialogPane().lookup(".content.label");
+                if (contentLabel != null) {
+                    contentLabel.setStyle("-fx-font-family: 'Georgia'; -fx-font-size: 14px; -fx-text-fill: #2b1d12;");
+                }
+
+                alert.getDialogPane().getButtonTypes().forEach(type -> {
+                    var button = alert.getDialogPane().lookupButton(type);
+                    button.setStyle("-fx-background-color: #271d15; -fx-text-fill: white; -fx-font-family: 'Georgia'; -fx-background-radius: 6;");
+                });
+
+                alert.showAndWait();
             }
 
         } catch (SQLException e) {
