@@ -76,6 +76,7 @@
 
 .era-sidebar{
     -fx-background-color: #afa28e;
+    -fx-background-radius: 0;
 }
 
 .sidebar-link{
@@ -163,8 +164,10 @@
 }
 
 .parchment-modern{
+    -fx-background-color: #f3ead0;
     -fx-background-image: url('images/Modern_era.png');
     -fx-background-size: cover;
+    -fx-background-position: center;
 }
 
 .conversions-panel {
@@ -190,9 +193,14 @@
     -fx-background-color: transparent;
     -fx-background: transparent;
     -fx-border-color: transparent;
+    -fx-padding: 0;
 }
 
 .recipe-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.recipe-scroll > .corner {
     -fx-background-color: transparent;
 }
 
@@ -202,11 +210,11 @@
 }
 
 .era-intro-overlay {
-    -fx-background-color: #efe3bf;
-    -fx-background-radius: 10;
+    -fx-background-color: rgba(239, 227, 191, 0.97);
+    -fx-background-radius: 12;
     -fx-border-color: #6e4f2f;
-    -fx-border-radius: 10;
-    -fx-border-width: 1.4;
+    -fx-border-radius: 12;
+    -fx-border-width: 1.6;
 }
 
 .era-intro-title {
@@ -228,17 +236,17 @@
 }
 
 .recipe-card {
-    -fx-background-color: rgba(255, 248, 224, 0.90);
+    -fx-background-color: #f5ecd3;
     -fx-background-radius: 12;
     -fx-border-color: #6e4f2f;
     -fx-border-radius: 12;
     -fx-border-width: 1.5;
-    -fx-pref-width: 380;
-    -fx-max-width: 380;
+    -fx-pref-width: 560;
+    -fx-max-width: 760;
 }
 
 .recipe-card:hover {
-    -fx-background-color: rgba(255, 248, 224, 0.98);
+    -fx-background-color: #fbf4de;
     -fx-cursor: hand;
 }
 
@@ -252,6 +260,13 @@
     -fx-font-size: 17px;
     -fx-font-weight: bold;
     -fx-text-fill: #2b1d12;
+}
+
+.recipe-detail-lines {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 12px;
+    -fx-text-fill: #4a3423;
+    -fx-line-spacing: 2;
 }
 
 .recipe-meta {
@@ -385,4 +400,19 @@
 .search-results .list-cell:filled:selected {
     -fx-background-color: rgba(110, 79, 47, 0.3);
     -fx-text-fill: #2b1d12;
+}
+
+/* Responsive layout helpers */
+.era-tabs {
+    -fx-tab-min-width: 95px;
+}
+
+.conversions-panel {
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+.recipe-output-area {
+    -fx-min-width: 0;
+    -fx-min-height: 0;
 }

@@ -93,7 +93,7 @@ public class BakeController extends BaseNavigator {
                 "-----------------\n" +
                 selectedRecipe.getName() + "\n\n" +
                 "Source: " + safeText(selectedRecipe.getSource(), "Not listed") + "\n" +
-                "Base portion: " + selectedRecipe.getBasePortion() + "\n" +
+                "Base portion: " + selectedRecipe.getBasePortion() + "\n\n" +
                 "Original temperature: " + safeText(selectedRecipe.getTemperatureDescription(), "Not listed") + "\n\n" +
                 "Ingredients:\n" + formatOriginalIngredients() + "\n\n" +
                 "Original Recipe Text:\n" + safeText(selectedRecipe.getOriginalText(), "Not available");

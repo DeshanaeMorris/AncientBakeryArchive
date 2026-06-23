@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.ancientbakery.ancientbakeryarchive.PantryMatcherController"
-      stylesheets="@../styles.css"
-      styleClass="pantry-screen"
-      prefHeight="600.0" prefWidth="800.0">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.ancientbakery.ancientbakeryarchive.PantryMatcherController"
+            stylesheets="@../styles.css"
+            styleClass="pantry-screen"
+            prefHeight="600.0" prefWidth="800.0"
+            minHeight="500.0" minWidth="700.0">
 
     <!-- Left Sidebar: Ingredient Checklist -->
-    <VBox layoutY="60" layoutX="20" prefWidth="150" prefHeight="520"
-          spacing="10" alignment="TOP_CENTER" styleClass="era-sidebar">
+    <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="20.0"
+          prefWidth="150" spacing="10" alignment="TOP_CENTER" styleClass="era-sidebar">
 
         <Label text="Your Pantry" styleClass="sidebar-title"/>
-        <Label text="Check what you have:" styleClass="sidebar-subtitle"/>
+        <Label text="Check what you have:" styleClass="sidebar-subtitle" wrapText="true"/>
 
-        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" prefHeight="380">
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
             <VBox fx:id="ingredientCheckboxPane" spacing="6">
                 <padding>
                     <Insets top="8" right="8" bottom="8" left="8"/>
@@ -37,7 +34,8 @@
     </VBox>
 
     <!-- Main Content -->
-    <TabPane layoutX="185" layoutY="20" prefWidth="595" prefHeight="560"
+    <TabPane AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
+             AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
@@ -49,17 +47,18 @@
                 <HBox alignment="CENTER_LEFT" spacing="12">
                     <Label text="Recipes You Can Make"
                            styleClass="recipe-title-small"
+                           maxWidth="Infinity"
                            HBox.hgrow="ALWAYS"/>
                     <Label fx:id="matchCountLabel" text="0 matches"
                            styleClass="match-badge"/>
                 </HBox>
 
                 <Label text="Select ingredients from the sidebar to find matching recipes."
-                       styleClass="recipe-instruction"/>
+                       styleClass="recipe-instruction" wrapText="true"/>
 
                 <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
                     <FlowPane fx:id="recipeResultsPane" hgap="12" vgap="12"
-                              prefWrapLength="500">
+                              maxWidth="Infinity">
                         <padding>
                             <Insets top="8" right="8" bottom="8" left="8"/>
                         </padding>

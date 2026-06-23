@@ -161,8 +161,7 @@ public class PantryMatcherController extends BaseNavigator {
                         "/com/ancientbakery/ancientbakeryarchive/fxml/bakenow-view.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) card.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
+                BaseNavigator.setResponsiveScene(stage, root);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
