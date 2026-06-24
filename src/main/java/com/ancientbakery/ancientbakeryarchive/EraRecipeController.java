@@ -6,6 +6,8 @@ import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -17,6 +19,9 @@ public abstract class EraRecipeController extends BaseNavigator {
 
     @FXML
     private VBox recipeCardsBox;
+
+    @FXML
+    private ImageView recipeImageView;
 
     private final RecipeRepository recipeRepository = new RecipeRepository();
     private VBox selectedCard;
@@ -81,10 +86,12 @@ public abstract class EraRecipeController extends BaseNavigator {
 
         for (Recipe recipe : recipes) {
             VBox card = createRecipeCard(recipe);
+
             if (firstCard == null) {
                 firstCard = card;
                 firstRecipe = recipe;
             }
+
             recipeCardsBox.getChildren().add(card);
         }
 
@@ -123,6 +130,7 @@ public abstract class EraRecipeController extends BaseNavigator {
 
         card.setOnMouseClicked(event -> selectRecipe(recipe, card));
         card.getChildren().addAll(title, historicalHeader, historicalText, ingredientsHeader, ingredients);
+
         return card;
     }
 
@@ -145,17 +153,43 @@ public abstract class EraRecipeController extends BaseNavigator {
         }
 
         selectedCard = card;
+
         if (!card.getStyleClass().contains("recipe-card-selected")) {
             card.getStyleClass().add("recipe-card-selected");
         }
 
         AppState.selectRecipe(recipe.getId());
+        loadRecipeImage(recipe);
+    }
+
+    private void loadRecipeImage(Recipe recipe) {
+        if (recipeImageView == null) {
+            return;
+        }
+
+        String imageName = recipe.getImageUrl();
+
+        if (imageName == null || imageName.isBlank()) {
+            return;
+        }
+
+        String imagePath = "/com/ancientbakery/ancientbakeryarchive/images/" + imageName;
+        var imageStream = getClass().getResourceAsStream(imagePath);
+
+        if (imageStream == null) {
+            System.out.println("Could not find image: " + imagePath);
+            return;
+        }
+
+        Image image = new Image(imageStream);
+        recipeImageView.setImage(image);
     }
 
     private String format(double value) {
         if (value == Math.rint(value)) {
             return String.valueOf((int) value);
         }
+
         return String.format("%.2f", value);
     }
 
