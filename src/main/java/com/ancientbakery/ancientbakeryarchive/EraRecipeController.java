@@ -30,6 +30,7 @@ public abstract class EraRecipeController extends BaseNavigator {
 
     @FXML
     private ImageView recipeImageView;
+
     private static List<Glossary> glossaryTerms;
 
     private final RecipeRepository recipeRepository = new RecipeRepository();
