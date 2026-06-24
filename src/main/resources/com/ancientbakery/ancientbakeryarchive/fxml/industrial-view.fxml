@@ -83,7 +83,14 @@
 
         <Tab text="HISTORY">
             <StackPane styleClass="parchment-industrial">
-                <Label text="History coming soon" styleClass="recipe-title"/>
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <TextArea fx:id="historyTextArea"
+                          editable="false"
+                          wrapText="true"
+                          styleClass="recipe-body"
+                          maxWidth="720" />
             </StackPane>
         </Tab>
 

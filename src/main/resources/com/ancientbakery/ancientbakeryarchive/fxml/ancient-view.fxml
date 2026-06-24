@@ -88,7 +88,7 @@
         </Tab>
 
         <Tab text="ANALYTICS HUB">
-            <StackPane styleClass="parchment-industrial">
+            <StackPane styleClass="parchment-ancient">
                 <fx:include source="analytics-view.fxml"/>
             </StackPane>
         </Tab>
