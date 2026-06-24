@@ -7,6 +7,7 @@ import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -36,6 +37,13 @@ public abstract class EraRecipeController extends BaseNavigator {
     private final RecipeRepository recipeRepository = new RecipeRepository();
     private VBox selectedCard;
 
+    //change
+    @FXML
+    private VBox getEraTitleBox;
+
+    @FXML
+    private TextArea historyTextArea;
+
     protected abstract int getEraId();
 
     @FXML
@@ -47,6 +55,18 @@ public abstract class EraRecipeController extends BaseNavigator {
         Era era = recipeRepository.findEraById(getEraId());
         loadEraTitle(era);
         loadRecipeCards();
+        loadEraHistory();
+    }
+    private void loadEraHistory(){
+        if (historyTextArea == null){
+         return;
+        }
+        //pulling text from repo/current id
+        String historyText = recipeRepository.getHistoryByEraId(getEraId());
+        //update UI
+        historyTextArea.setWrapText(true);
+        historyTextArea.setText(safeText(historyText, "No historical context available for this era."));
+        //
     }
 
     private void loadEraTitle(Era era) {
@@ -96,7 +116,6 @@ public abstract class EraRecipeController extends BaseNavigator {
 
         for (Recipe recipe : recipes) {
             VBox card = createRecipeCard(recipe);
-
             if (firstCard == null) {
                 firstCard = card;
                 firstRecipe = recipe;
@@ -144,7 +163,6 @@ public abstract class EraRecipeController extends BaseNavigator {
 
         card.setOnMouseClicked(event -> selectRecipe(recipe, card));
         card.getChildren().addAll(title, historicalHeader, historicalText, ingredientsHeader, ingredients);
-
         return card;
     }
 
@@ -218,7 +236,6 @@ public abstract class EraRecipeController extends BaseNavigator {
         }
 
         selectedCard = card;
-
         if (!card.getStyleClass().contains("recipe-card-selected")) {
             card.getStyleClass().add("recipe-card-selected");
         }
@@ -254,7 +271,6 @@ public abstract class EraRecipeController extends BaseNavigator {
         if (value == Math.rint(value)) {
             return String.valueOf((int) value);
         }
-
         return String.format("%.2f", value);
     }
 

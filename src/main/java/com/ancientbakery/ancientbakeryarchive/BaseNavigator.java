@@ -1,6 +1,7 @@
 package com.ancientbakery.ancientbakeryarchive;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -71,4 +72,11 @@ public class BaseNavigator {
     public void goBakeNow(ActionEvent event) {
         goTo(event, "bakenow-view.fxml");
     }
-}
+
+    public void goAnalytics(ActionEvent event){goTo(event, "analytics-view.fxml");
+
+    }
+
+    }
+
+
