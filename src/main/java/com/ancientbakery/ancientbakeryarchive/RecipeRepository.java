@@ -1,6 +1,7 @@
 package com.ancientbakery.ancientbakeryarchive;
 
 import com.ancientbakery.ancientbakeryarchive.model.Era;
+import com.ancientbakery.ancientbakeryarchive.model.Glossary;
 import com.ancientbakery.ancientbakeryarchive.model.Recipe;
 import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 
@@ -199,5 +200,28 @@ public class RecipeRepository {
         }
 
         return stats;
+
+    public List<Glossary> findAllGlossaryTerms() {
+        List<Glossary> terms = new ArrayList<>();
+        String sql = "SELECT id, Term, Definition, Modern_Substitute FROM Glossary";
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Glossary term = new Glossary();
+                    term.setId(result.getInt("id"));
+                    term.setTerm(result.getString("Term"));
+                    term.setDefinition(result.getString("Definition"));
+                    term.setModernSubstitute(result.getString("Modern_Substitute"));
+                    terms.add(term);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return terms;
     }
 }
