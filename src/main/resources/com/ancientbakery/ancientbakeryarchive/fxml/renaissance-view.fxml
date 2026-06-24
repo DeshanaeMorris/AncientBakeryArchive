@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
@@ -69,9 +70,15 @@
         </Tab>
 
         <Tab text="PICTURES">
-            <StackPane styleClass="parchment-renaissance">
-                <Label text="Pictures coming soon" styleClass="recipe-title"/>
-            </StackPane>
+            <VBox alignment="CENTER" spacing="20"
+                  style="-fx-background-color: #f6ead0;">
+
+                <ImageView fx:id="recipeImageView"
+                           fitWidth="550"
+                           fitHeight="400"
+                           preserveRatio="true"/>
+
+            </VBox>
         </Tab>
 
         <Tab text="HISTORY">
@@ -85,6 +92,7 @@
                 <Label text="Popular coming soon" styleClass="recipe-title"/>
             </StackPane>
         </Tab>
+
     </TabPane>
 
 </AnchorPane>
