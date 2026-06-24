@@ -416,3 +416,9 @@
     -fx-min-width: 0;
     -fx-min-height: 0;
 }
+
+.old-term {
+    -fx-fill: #762607;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
