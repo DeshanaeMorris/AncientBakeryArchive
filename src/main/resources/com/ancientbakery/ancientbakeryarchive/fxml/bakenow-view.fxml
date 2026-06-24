@@ -24,7 +24,6 @@
         <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
 
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
-        <Button text="ANALYTICS" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goAnalytics"/>
         <Button text="Go Back" styleClass="sidebar-link" onAction="#goToContents"/>
 
     </VBox>
@@ -82,9 +81,9 @@
             </StackPane>
         </Tab>
 
-        <Tab text="POPULAR">
-            <StackPane styleClass="parchment-ancient">
-                <Label text="Popular coming soon" styleClass="recipe-title"/>
+        <Tab text="ANALYTICS HUB">
+            <StackPane styleClass="parchment-industrial">
+                <fx:include source="analytics-view.fxml"/>
             </StackPane>
         </Tab>
     </TabPane>
