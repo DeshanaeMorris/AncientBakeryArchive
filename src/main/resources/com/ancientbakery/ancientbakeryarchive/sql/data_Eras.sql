@@ -7,3 +7,15 @@ INSERT INTO Eras (id, name, time_period, History_text) VALUES
     (5, '20th Century', '1900 AD - 2000 AD', 'The era of convenience, pre-packaged baking mixes, and global standardization. High-speed commercial mixers, electric ovens, sliced sandwich bread, and optimized instant yeast strains transformed baking from a grueling daily chore into an efficient science.'),
     (6, 'Modern', '2000 AD - Present', 'A diverse landscape combining rapid technological innovation with historical revival. Contemporary baking features advanced tools like digital scales, sourdough preservation movements, gluten-free grain alternatives, and global recipe sharing via digital archives.');
 
+-- Updating Eras with historical text data
+UPDATE Eras SET history_text = 'Cooking and baking in Greco-Roman antiquity were deeply defined by the constraints of wood-fired hearths, clay ovens...' WHERE id = 1;
+
+UPDATE Eras SET history_text = 'Culinary practice in the European Middle Ages was deeply structured around social hierarchy, religious fasting calendars...' WHERE id = 2;
+
+UPDATE Eras SET history_text = 'The Renaissance brought a definitive culinary shift away from the highly acidic, heavily spiced sauces...' WHERE id = 3;
+
+UPDATE Eras SET history_text = 'The 19th century completely revolutionized the domestic and commercial baking landscape through mechanical standardization...' WHERE id = 4;
+
+UPDATE Eras SET history_text = 'The 20th century was characterized by a massive acceleration of home electricity, automated preservation...' WHERE id = 5;
+
+UPDATE Eras SET history_text = 'Contemporary culinary culture operates in a unique state of balance, combining global hyper-connectivity...' WHERE id = 6;

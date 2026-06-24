@@ -6,6 +6,7 @@ import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -21,6 +22,13 @@ public abstract class EraRecipeController extends BaseNavigator {
     private final RecipeRepository recipeRepository = new RecipeRepository();
     private VBox selectedCard;
 
+    //change
+    @FXML
+    private VBox getEraTitleBox;
+
+    @FXML
+    private TextArea historyTextArea;
+
     protected abstract int getEraId();
 
     @FXML
@@ -32,6 +40,18 @@ public abstract class EraRecipeController extends BaseNavigator {
         Era era = recipeRepository.findEraById(getEraId());
         loadEraTitle(era);
         loadRecipeCards();
+        loadEraHistory();
+    }
+    private void loadEraHistory(){
+        if (historyTextArea == null){
+         return;
+        }
+        //pulling text from repo/current id
+        String historyText = recipeRepository.getHistoryByEraId(getEraId());
+        //update UI
+        historyTextArea.setWrapText(true);
+        historyTextArea.setText(safeText(historyText, "No historical context available for this era."));
+        //
     }
 
     private void loadEraTitle(Era era) {
