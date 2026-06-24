@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
@@ -26,6 +28,9 @@ public abstract class EraRecipeController extends BaseNavigator {
 
     @FXML
     private VBox recipeCardsBox;
+
+    @FXML
+    private ImageView recipeImageView;
 
     private static List<Glossary> glossaryTerms;
 
@@ -115,6 +120,7 @@ public abstract class EraRecipeController extends BaseNavigator {
                 firstCard = card;
                 firstRecipe = recipe;
             }
+
             recipeCardsBox.getChildren().add(card);
         }
 
@@ -235,6 +241,30 @@ public abstract class EraRecipeController extends BaseNavigator {
         }
 
         AppState.selectRecipe(recipe.getId());
+        loadRecipeImage(recipe);
+    }
+
+    private void loadRecipeImage(Recipe recipe) {
+        if (recipeImageView == null) {
+            return;
+        }
+
+        String imageName = recipe.getImageUrl();
+
+        if (imageName == null || imageName.isBlank()) {
+            return;
+        }
+
+        String imagePath = "/com/ancientbakery/ancientbakeryarchive/images/" + imageName;
+        var imageStream = getClass().getResourceAsStream(imagePath);
+
+        if (imageStream == null) {
+            System.out.println("Could not find image: " + imagePath);
+            return;
+        }
+
+        Image image = new Image(imageStream);
+        recipeImageView.setImage(image);
     }
 
     private String format(double value) {
