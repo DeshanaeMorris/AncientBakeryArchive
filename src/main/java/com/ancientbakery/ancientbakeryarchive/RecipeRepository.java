@@ -200,6 +200,7 @@ public class RecipeRepository {
         }
 
         return stats;
+    }
 
     public List<Glossary> findAllGlossaryTerms() {
         List<Glossary> terms = new ArrayList<>();
