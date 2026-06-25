@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
@@ -23,7 +24,6 @@
         <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
 
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
-
     </VBox>
 
     <TabPane AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
@@ -69,20 +69,34 @@
         </Tab>
 
         <Tab text="PICTURES">
-            <StackPane styleClass="parchment-industrial">
-                <Label text="Pictures coming soon" styleClass="recipe-title"/>
-            </StackPane>
+            <VBox alignment="CENTER"
+                  spacing="20"
+                  style="-fx-background-color: #f6ead0;">
+
+                <ImageView fx:id="recipeImageView"
+                           fitWidth="550"
+                           fitHeight="400"
+                           preserveRatio="true"/>
+
+            </VBox>
         </Tab>
 
         <Tab text="HISTORY">
             <StackPane styleClass="parchment-industrial">
-                <Label text="History coming soon" styleClass="recipe-title"/>
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <TextArea fx:id="historyTextArea"
+                          editable="false"
+                          wrapText="true"
+                          styleClass="recipe-body"
+                          maxWidth="720" />
             </StackPane>
         </Tab>
 
-        <Tab text="POPULAR">
+        <Tab text="ANALYTICS HUB">
             <StackPane styleClass="parchment-industrial">
-                <Label text="Popular coming soon" styleClass="recipe-title"/>
+                <fx:include source="analytics-view.fxml"/>
             </StackPane>
         </Tab>
     </TabPane>

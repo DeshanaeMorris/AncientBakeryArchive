@@ -76,13 +76,20 @@
 
         <Tab text="HISTORY">
             <StackPane styleClass="parchment-ancient">
-                <Label text="History coming soon" styleClass="recipe-title"/>
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <TextArea fx:id="historyTextArea"
+                          editable="false"
+                          wrapText="true"
+                          styleClass="recipe-body"
+                          maxWidth="720" />
             </StackPane>
         </Tab>
 
-        <Tab text="POPULAR">
+        <Tab text="ANALYTICS HUB">
             <StackPane styleClass="parchment-ancient">
-                <Label text="Popular coming soon" styleClass="recipe-title"/>
+                <fx:include source="analytics-view.fxml"/>
             </StackPane>
         </Tab>
     </TabPane>

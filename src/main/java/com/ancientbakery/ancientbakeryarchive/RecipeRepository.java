@@ -1,6 +1,7 @@
 package com.ancientbakery.ancientbakeryarchive;
 
 import com.ancientbakery.ancientbakeryarchive.model.Era;
+import com.ancientbakery.ancientbakeryarchive.model.Glossary;
 import com.ancientbakery.ancientbakeryarchive.model.Recipe;
 import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 
@@ -8,8 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RecipeRepository {
     public Era findEraById(int eraId) {
@@ -125,5 +125,104 @@ public class RecipeRepository {
         recipe.setSource(result.getString("Sources"));
         recipe.setImageUrl(result.getString("image_url"));
         return recipe;
+    }
+    public String getHistoryByEraId(int eraId) {
+        String sql = "SELECT history_text FROM Eras WHERE id = ?";
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, eraId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("history_text");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "No historical context available for this era.";
+    }
+    public Map<String, Integer> getCookingFatRankings() {
+        Map<String, Integer> rankings = new LinkedHashMap<>();
+        String[] fats = {"Butter", "Oil", "Lard", "Suet", "Fat"};
+
+        try (Connection conn = DatabaseManager.getConnection()) {
+            for (String fat : fats) {
+                String sql = """
+                        SELECT COUNT(DISTINCT ri.Recipes_ID) 
+                        FROM Recipe_Ingredients ri
+                        JOIN Ingredients i ON i.id = ri.Ingredients_ID
+                        WHERE LOWER(i.name) LIKE ?
+                        """;
+                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    pstmt.setString(1, "%" + fat.toLowerCase() + "%");
+                    try (ResultSet rs = pstmt.executeQuery()) {
+                        if (rs.next()) {
+                            rankings.put(fat, rs.getInt(1));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error calculating fat rankings: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return rankings;
+    }
+
+    public Map<String, Integer> getGlobalArchiveStats() {
+        Map<String, Integer> stats = new HashMap<>();
+
+        String totalRecipesSql = "SELECT COUNT(*) FROM Recipes";
+        String totalErasSql = "SELECT COUNT(*) FROM Eras";
+
+        try (Connection conn = DatabaseManager.getConnection()) {
+
+            //Total Recipe Count
+            try (PreparedStatement pst = conn.prepareStatement(totalRecipesSql);
+                 ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("totalRecipes", rs.getInt(1));
+                }
+            }
+
+            //Total Era Count
+            try (PreparedStatement pst = conn.prepareStatement(totalErasSql);
+                 ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("totalEras", rs.getInt(1));
+                }
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error fetching global archive stats: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return stats;
+    }
+
+    public List<Glossary> findAllGlossaryTerms() {
+        List<Glossary> terms = new ArrayList<>();
+        String sql = "SELECT id, Term, Definition, Modern_Substitute FROM Glossary";
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Glossary term = new Glossary();
+                    term.setId(result.getInt("id"));
+                    term.setTerm(result.getString("Term"));
+                    term.setDefinition(result.getString("Definition"));
+                    term.setModernSubstitute(result.getString("Modern_Substitute"));
+                    terms.add(term);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return terms;
     }
 }
