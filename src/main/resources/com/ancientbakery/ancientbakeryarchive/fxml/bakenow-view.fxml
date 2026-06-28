@@ -81,9 +81,9 @@
             </StackPane>
         </Tab>
 
-        <Tab text="POPULAR">
-            <StackPane styleClass="parchment-ancient">
-                <Label text="Popular coming soon" styleClass="recipe-title"/>
+        <Tab text="ANALYTICS HUB">
+            <StackPane styleClass="parchment-industrial">
+                <fx:include source="analytics-view.fxml"/>
             </StackPane>
         </Tab>
     </TabPane>
