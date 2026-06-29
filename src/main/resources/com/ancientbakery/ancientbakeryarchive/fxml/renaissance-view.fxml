@@ -95,7 +95,7 @@
 
         <Tab text="ANALYTICS HUB">
             <StackPane styleClass="parchment-renaissance">
-                <fx:include source="analytics-view.fxml"/>
+                <fx:include source="analytics-hub-view.fxml"/>
             </StackPane>
         </Tab>
 

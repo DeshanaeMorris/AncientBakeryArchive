@@ -202,6 +202,55 @@ public class RecipeRepository {
         return stats;
     }
 
+    public List<Map<String, Object>> getSweetenerUsageByEra() {
+        List<Map<String, Object>> results = new ArrayList<>();
+        String sql = """
+            SELECT
+                everything.era_name,
+                everything.sweetener_name,
+                COALESCE(real_counts.usage_count, 0) AS usage_count
+            FROM (
+                SELECT eras.name AS era_name, distinct_sweeteners.name AS sweetener_name, eras.era_order AS everything_eraorder
+                FROM Eras eras
+                CROSS JOIN (
+                    SELECT DISTINCT name
+                    FROM Ingredients
+                    WHERE category = 'sweetener'
+                ) AS distinct_sweeteners
+            ) AS everything
+            LEFT JOIN (
+                SELECT eras.name AS era_name, i.name AS sweetener_name, COUNT(*) AS usage_count
+                FROM Eras eras
+                JOIN Recipes r ON eras.id = r.era_id
+                JOIN Recipe_Ingredients ri ON r.id = ri.Recipes_ID
+                JOIN Ingredients i ON ri.Ingredients_ID = i.id
+                WHERE i.category = 'sweetener'
+                GROUP BY eras.name, i.name
+            ) AS real_counts
+            ON everything.era_name = real_counts.era_name
+               AND everything.sweetener_name = real_counts.sweetener_name
+            ORDER BY everything_eraorder, everything.sweetener_name
+            """;
+
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Map<String, Object> row = new HashMap<>();
+                row.put("era_name", rs.getString("era_name"));
+                row.put("sweetener_name", rs.getString("sweetener_name"));
+                row.put("usage_count", rs.getInt("usage_count"));
+                results.add(row);
+            }
+        } catch (Exception e) {
+            System.err.println("Error fetching sweetener usage: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return results;
+    }
+
     public List<Glossary> findAllGlossaryTerms() {
         List<Glossary> terms = new ArrayList<>();
         String sql = "SELECT id, Term, Definition, Modern_Substitute FROM Glossary";

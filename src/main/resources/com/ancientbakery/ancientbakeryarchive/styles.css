@@ -422,3 +422,24 @@
     -fx-underline: true;
     -fx-cursor: hand;
 }
+
+.analytics-card {
+    -fx-background-color: #f3e3c4;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-border-color: #c9a868;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.analytics-card-button {
+    -fx-cursor: hand;
+}
+
+.analytics-card-button:hover {
+    -fx-background-color: #e8d4a8;
+}
+
+.analytics-card-button:pressed {
+    -fx-background-color: #ddc794;
+}

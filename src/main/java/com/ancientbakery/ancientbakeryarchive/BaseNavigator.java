@@ -73,7 +73,7 @@ public class BaseNavigator {
         goTo(event, "bakenow-view.fxml");
     }
 
-    public void goAnalytics(ActionEvent event){goTo(event, "analytics-view.fxml");
+    public void goAnalytics(ActionEvent event){goTo(event, "analytics-hub-view.fxml");
 
     }
 
