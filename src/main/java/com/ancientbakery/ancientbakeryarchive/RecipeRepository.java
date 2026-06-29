@@ -170,6 +170,70 @@ public class RecipeRepository {
         return rankings;
     }
 
+
+    public Map<String, Map<String, Integer>> getYeastTimelineData() {
+        Map<String, Map<String, Integer>> timeline = new LinkedHashMap<>();
+        String[] agentTypes = {"Sourdough starter", "Yeast", "Chemical leavening (baking powder/soda)", "Instant yeast"};
+        String eraSql = "SELECT id, name FROM Eras ORDER BY id";
+
+        String agentSql = """
+                SELECT e.name AS era_name,
+                       CASE
+                           WHEN LOWER(i.name) LIKE '%instant yeast%' THEN 'Instant yeast'
+                           WHEN LOWER(i.name) LIKE '%sourdough%' OR LOWER(i.name) LIKE '%starter%' THEN 'Sourdough starter'                           
+                           WHEN LOWER(i.name) LIKE '%baking powder%'
+                           OR LOWER(i.name) LIKE '%baking soda%'
+                           OR LOWER(i.name) LIKE '%cream of tartar%' THEN 'Chemical leavening (baking powder/soda)'
+                           WHEN LOWER(i.name) LIKE '%yeast%' THEN 'Yeast'
+                           ELSE 'Other'
+                       END AS agent_type,
+                       COUNT(DISTINCT r.id) AS recipe_count
+                FROM Eras e
+                JOIN Recipes r ON r.era_id = e.id
+                JOIN Recipe_Ingredients ri ON ri.Recipes_ID = r.id
+                JOIN Ingredients i ON i.id = ri.Ingredients_ID
+                WHERE LOWER(i.name) LIKE '%yeast%'
+                   OR LOWER(i.name) LIKE '%sourdough%'
+                   OR LOWER(i.name) LIKE '%starter%'
+                   OR LOWER(i.name) LIKE '%baking powder%'
+                   OR LOWER(i.name) LIKE '%baking soda%'
+                   OR LOWER(i.name) LIKE '%cream of tartar%'
+                GROUP BY e.id, e.name, agent_type
+                ORDER BY e.id
+                """;
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement eraStatement = connection.prepareStatement(eraSql);
+             ResultSet eras = eraStatement.executeQuery()) {
+
+            while (eras.next()) {
+                Map<String, Integer> counts = new LinkedHashMap<>();
+                for (String agentType : agentTypes) {
+                    counts.put(agentType, 0);
+                }
+                timeline.put(eras.getString("name"), counts);
+            }
+
+            try (PreparedStatement agentStatement = connection.prepareStatement(agentSql);
+                 ResultSet result = agentStatement.executeQuery()) {
+
+                while (result.next()) {
+                    String eraName = result.getString("era_name");
+                    String agentType = result.getString("agent_type");
+                    int recipeCount = result.getInt("recipe_count");
+
+                    if (timeline.containsKey(eraName) && timeline.get(eraName).containsKey(agentType)) {
+                        timeline.get(eraName).put(agentType, recipeCount);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return timeline;
+    }
+
     public Map<String, Integer> getGlobalArchiveStats() {
         Map<String, Integer> stats = new HashMap<>();
 
