@@ -444,7 +444,6 @@
     -fx-background-color: #ddc794;
     /* UI polish for Renaissance and Industrial recipe screens */
 }
-
     .clean-recipe-page {
         -fx-background-color: #f3ead0;
         -fx-border-color: #2e2118;
@@ -567,4 +566,3 @@
         -fx-border-width: 2;
         -fx-padding: 18;
     }
-}

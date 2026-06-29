@@ -1,5 +1,5 @@
 -- Recipe 18: Ante De Mantequilla
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Ante De Mantequilla (Butter Custard)',
            4,
@@ -8,7 +8,7 @@ VALUES (
            'Bake in a bain-marie at 160°C (320°F) for 30-40 minutes',
            10,
            'Alejandro Valdes, Novisimo arte de cocina (1831)',
-           NULL
+           'butter_custard.jpg'
        );
 -- New ingredients for Recipe 18
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('sponge cake', 'grain');
@@ -25,7 +25,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (18, 18, 1, 'tsp');    -- cinnamon
 
 -- Recipe 19: Rullad Jelly Cake
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Rullad Jelly Cake (Rolled Jelly Cake)',
            4,
@@ -34,7 +34,7 @@ VALUES (
            'Bake at 200°C (400°F) for 20 minutes',
            10,
            'C. A. Vallentin, Praktisk illustrerad kok-bok for Svenskarne i Amerika (1889)',
-           NULL
+           'rolled_jelly_cake.jpg'
        );
 -- New ingredients for Recipe 19
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('baking powder', 'rising agent');
@@ -48,7 +48,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (19, 46, 150, 'g');    -- jam or jelly
 
 -- Recipe 20: Smörbakelse
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Smörbakelse (Butter Pastry)',
            4,
@@ -57,7 +57,7 @@ VALUES (
            'Bake at 200°C (400°F) for 15-20 minutes',
            10,
            'C. A. Vallentin, Praktisk illustrerad kok-bok for Svenskarne i Amerika (1889)',
-           NULL
+           'butter_pastry.jpg'
        );
 -- No new ingredients for Recipe 20
 -- Recipe_Ingredients
@@ -67,7 +67,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (20, 40, 1, 'whole');  -- egg whites
 
 -- Recipe 21: Zuckerkastanien
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Zuckerkastanien (Sugar Chestnuts)',
            4,
@@ -76,7 +76,7 @@ VALUES (
            'Broil or torch briefly to set the glaze',
            10,
            'Marianka, Der Marianka Mundkochin des Hans-Jorgel von Gumpoldskirchen (1850)',
-           NULL
+           'sugar_chestnuts.jpg'
        );
 -- New ingredients for Recipe 21
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('white wine', 'other');
@@ -88,7 +88,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (21, 47, 1, 'tsp');    -- white wine
 
 -- Recipe 22: Citronový Sulc
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Citronový Sulc (Lemon Jelly)',
            4,
@@ -97,7 +97,7 @@ VALUES (
            'No baking - chill until set',
            8,
            'Unknown Author, Prva kucharska kniha v slovenskej reci (1870)',
-           NULL
+           'lemon_jelly.jpg'
        );
 -- New ingredients for Recipe 22
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('gelatin', 'other');
@@ -108,7 +108,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (22, 48, 50, 'g');     -- gelatin
 
 -- Recipe 23: Blandad Kompott
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Blandad Kompott (Mixed Compote)',
            4,
@@ -117,7 +117,7 @@ VALUES (
            'Simmer on stovetop over low heat for 1-2 hours',
            6,
            'C. A. Vallentin, Praktisk illustrerad kok-bok for Svenskarne i Amerika (1889)',
-           NULL
+           'mixed_compote.jpg'
        );
 -- New ingredients for Recipe 23
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('dried apples', 'fruit');

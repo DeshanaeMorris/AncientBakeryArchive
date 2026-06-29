@@ -1,5 +1,5 @@
 -- Recipe 24: Lemon Cream Pie
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Lemon Cream Pie',
            5,
@@ -25,7 +25,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (24, 59, 1, 'whole');   -- meringue
 
 -- Recipe 25: Soft Gingerbread
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Soft Gingerbread',
            5,
@@ -49,7 +49,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (25, 17, 1, 'tbsp');    -- ginger
 
 -- Recipe 26: Pear Marmalade
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Pear Marmalade',
            5,
@@ -69,7 +69,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (26, 17, 1, 'tsp');     -- ginger
 
 -- Recipe 27: Chuck Wagon Cornbread
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Chuck Wagon Cornbread',
            5,
@@ -89,7 +89,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (27, 19, 2, 'tbsp');    -- lard
 
 -- Recipe 28: Indian Pudding
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Baked Indian Pudding',
            5,
@@ -110,7 +110,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (28, 30, 120, 'ml');    -- cream
 
 -- Recipe 29: Gelée Macédoine
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Gelée Macédoine',
            5,
