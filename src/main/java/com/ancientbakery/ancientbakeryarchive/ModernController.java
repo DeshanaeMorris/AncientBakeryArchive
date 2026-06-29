@@ -5,4 +5,5 @@ public class ModernController extends EraRecipeController {
     protected int getEraId() {
         return 6;
     }
+
 }
