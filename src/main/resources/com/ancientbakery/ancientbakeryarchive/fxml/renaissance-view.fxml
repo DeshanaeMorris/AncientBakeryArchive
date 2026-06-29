@@ -26,12 +26,13 @@
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
     </VBox>
 
-    <TabPane AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
+    <TabPane fx:id="eraTabPane"
+             AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
-            <BorderPane styleClass="parchment-renaissance" minWidth="0.0" minHeight="0.0">
+            <BorderPane styleClass="renaissance-clean-page" minWidth="0.0" minHeight="0.0">
                 <top>
                     <VBox fx:id="eraTitleBox" alignment="CENTER" maxWidth="560"
                           spacing="4" styleClass="era-intro-overlay"
@@ -47,9 +48,6 @@
 
                 <center>
                     <StackPane alignment="TOP_CENTER">
-                        <BorderPane.margin>
-                            <Insets top="0" right="0" bottom="0" left="0"/>
-                        </BorderPane.margin>
                         <ScrollPane fitToWidth="true" styleClass="recipe-scroll"
                                     hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
                                     maxWidth="820" StackPane.alignment="TOP_CENTER">
@@ -57,7 +55,7 @@
                                 <Insets top="4" right="26" bottom="24" left="26"/>
                             </StackPane.margin>
                             <VBox fx:id="recipeCardsBox" alignment="TOP_CENTER"
-                                  styleClass="recipe-cards-content" spacing="14">
+                                  styleClass="recipe-cards-content" spacing="18">
                                 <padding>
                                     <Insets top="6" right="6" bottom="24" left="6"/>
                                 </padding>
@@ -68,16 +66,30 @@
             </BorderPane>
         </Tab>
 
-        <Tab text="PICTURES">
-            <VBox alignment="CENTER" spacing="20"
-                  style="-fx-background-color: #f6ead0;">
+        <Tab text="PICTURES" fx:id="picturesTab">
+            <StackPane styleClass="renaissance-clean-page">
+                <VBox alignment="CENTER"
+                      spacing="18"
+                      styleClass="picture-card">
 
-                <ImageView fx:id="recipeImageView"
-                           fitWidth="550"
-                           fitHeight="400"
-                           preserveRatio="true"/>
+                    <VBox alignment="CENTER" spacing="2">
+                        <Label fx:id="pictureRecipeTitle"
+                               text="Select a recipe"
+                               styleClass="picture-title"/>
 
-            </VBox>
+                        <Label fx:id="pictureEraLabel"
+                               text=""
+                               styleClass="picture-era"/>
+                    </VBox>
+
+                    <ImageView fx:id="recipeImageView"
+                               fitWidth="600"
+                               fitHeight="360"
+                               preserveRatio="true"
+                               smooth="true"
+                               styleClass="picture-image"/>
+                </VBox>
+            </StackPane>
         </Tab>
 
         <Tab text="HISTORY">
