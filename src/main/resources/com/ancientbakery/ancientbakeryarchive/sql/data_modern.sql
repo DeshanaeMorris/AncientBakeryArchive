@@ -1,5 +1,5 @@
 -- Recipe 30: Focaccia
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Focaccia',
            6,
@@ -24,7 +24,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (30, 72, 2, 'tsp');    -- rosemary
 
 -- Recipe 31: Sourdough Bread
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Sourdough Bread',
            6,
@@ -44,7 +44,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (31, 73, 100, 'g');    -- sourdough starter
 
 -- Recipe 32: Blueberry Muffins
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Blueberry Muffins',
            6,
@@ -73,7 +73,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (32, 68, 300, 'g');    -- blueberries
 
 -- Recipe 33: Dutch Apple Pie
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Dutch Apple Pie',
            6,
@@ -98,7 +98,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (33, 10, 115, 'g');    -- butter
 
 -- Recipe 34: Easy Homemade Biscuits
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Homemade Biscuits',
            6,
@@ -120,7 +120,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (34, 78, 180, 'ml');   -- buttermilk
 
 -- Recipe 35: Homemade Croissants
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Croissants',
            6,
