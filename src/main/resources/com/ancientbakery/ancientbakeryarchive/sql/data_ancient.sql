@@ -1,5 +1,5 @@
 -- Recipe 7: Libum
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Libum (Sweet Cheesecake)',
            1,
@@ -19,7 +19,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (7, 29, 4, 'whole'); -- bay leaves
 
 -- Recipe 8: Mustacei
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Mustacei (Wine Cakes)',
            1,
@@ -44,7 +44,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (8, 29, 12, 'whole'); -- bay leaves
 
 -- Recipe 9: Bucellatum
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Bucellatum (Roman Biscuit)',
            1,
@@ -65,7 +65,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (9, 34, 1, 'tbsp');  -- olive oil
 
 -- Recipe 10: Ova Spongia
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Ova Spongia ex Lactate (Crepes w/ Milk)',
            1,
@@ -87,7 +87,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (10, 36, 1, 'pinch'); -- black pepper
 
 -- Recipe 11: Panis Sourdough
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Panis Sourdough (Roman Sourdough Bread)',
            1,

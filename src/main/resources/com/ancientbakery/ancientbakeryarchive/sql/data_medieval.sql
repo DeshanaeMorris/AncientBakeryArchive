@@ -1,5 +1,5 @@
 -- Recipe 12: Cream Custard Tart
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Doucetes (Cream Custard Tart)',
            2,
@@ -23,7 +23,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (12, 20, 1, 'tsp');    -- salt
 
 -- Recipe 13: Gingerbrede
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Gingerbrede (Good)',
            2,
@@ -48,7 +48,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (13, 16, 1, 'tsp');    -- cloves
 
 -- Recipe 14: Rastons
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Rastons (Sweet Butter Bread)',
            2,
@@ -70,7 +70,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (14, 10, 200, 'g');    -- butter
 
 -- Recipe 15: Cryspes
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Cryspes (Medieval Fritters)',
            2,
@@ -91,7 +91,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (15, 20, 1, 'tsp');    -- salt
 
 -- Recipe 16: Creme Boylede
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Creme Boylede (Boiled Cream Pudding)',
            2,
@@ -113,7 +113,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (16, 20, 1, 'tsp');    -- salt
 
 -- Recipe 17: French Bread
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'French Bread (No-Knead)',
            2,
