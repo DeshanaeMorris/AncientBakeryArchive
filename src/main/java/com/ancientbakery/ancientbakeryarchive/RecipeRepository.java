@@ -126,6 +126,7 @@ public class RecipeRepository {
         recipe.setImageUrl(result.getString("image_url"));
         return recipe;
     }
+
     public String getHistoryByEraId(int eraId) {
         String sql = "SELECT history_text FROM Eras WHERE id = ?";
         try (Connection conn = DatabaseManager.getConnection();
@@ -142,6 +143,7 @@ public class RecipeRepository {
         }
         return "No historical context available for this era.";
     }
+
     public Map<String, Integer> getCookingFatRankings() {
         Map<String, Integer> rankings = new LinkedHashMap<>();
         String[] fats = {"Butter", "Oil", "Lard", "Suet", "Fat"};
@@ -205,7 +207,7 @@ public class RecipeRepository {
     public List<Map<String, Object>> getSweetenerUsageByEra() {
         List<Map<String, Object>> results = new ArrayList<>();
         String sql = """
-            SELECT
+                SELECT
                 everything.era_name,
                 everything.sweetener_name,
                 COALESCE(real_counts.usage_count, 0) AS usage_count
@@ -273,5 +275,28 @@ public class RecipeRepository {
         }
 
         return terms;
+    }
+    public Map<String, Integer> getEraBreakdownForFat(String fatName) {
+        Map<String, Integer> breakdown = new java.util.LinkedHashMap<>();
+        String query = "SELECT e.name AS era_name, COUNT(DISTINCT r.id) AS usage_count " + // <--
+                "FROM Recipe_Ingredients ri " +
+                "JOIN Recipes r ON ri.Recipes_ID = r.id " +
+                "JOIN Eras e ON r.era_id = e.id " +
+                "JOIN Ingredients i ON ri.Ingredients_ID = i.id " +
+                "WHERE LOWER(i.name) LIKE LOWER(?) " +
+                "GROUP BY e.id " +
+                "ORDER BY usage_count DESC;";
+
+        try (java.sql.Connection conn = DatabaseManager.getConnection();
+             java.sql.PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, fatName);
+            java.sql.ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                breakdown.put(rs.getString("era_name"), rs.getInt("usage_count"));
+            }
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return breakdown;
     }
 }
