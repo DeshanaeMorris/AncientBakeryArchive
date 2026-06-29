@@ -1,7 +1,7 @@
 --Renaissance Recipes
 
 -- Insert Recipe 1
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Apple and Cheese Pie',
            3,
@@ -10,7 +10,7 @@ VALUES (
            'From over and under, a little heat',
            8,
            'https://www.tastinghistory.com/recipes/applecheesepie',
-           'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2022/09/29/0/FNM_110122-Apple-Cheddar-Pie_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1664462392488.webp'
+           'apple_cheese_pie.jpg'
        );
 --Ingredients
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('flour', 'grain');
@@ -43,7 +43,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 -- Recipe 2
 
 -- Insert Recipe 2
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Prince Biskets',
            3,
@@ -52,7 +52,7 @@ VALUES (
            'Bake in coffins of white plate',
            12,
            'https://www.tastinghistory.com/recipes/princebiskets',
-           NULL
+           'prince_biskets.jpg'
        );
 
 -- Insert Ingredients (only adding ingredients not previously added)
@@ -61,7 +61,7 @@ INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('rose water', 'other'
 INSERT OR IGNORE INTO Ingredients (name, category) VALUES ('caraway seeds', 'spice');
 
 
--- Recipe 2 Ingredients
+-- Recipe 2 Ingredientsim
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (2, 7, 7, 'whole');   -- eggs
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (2, 1, 360, 'g');    -- flour
 INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALUES (2, 25, 360, 'g');   -- sugar
@@ -71,7 +71,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 -- Recipe 3
 
 -- Insert Recipe 3
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Dutch Pudding',
            3,
@@ -80,7 +80,7 @@ VALUES (
            'Let it stand by the fire to rise, bake an hour and half',
            12,
            'https://lostkitchenscrolls.org/cookbook-of-elizabeth-langley-manuscript-bib222421-25-to-make-a-dutch-pudding',
-           NULL
+           'dutch_pudding.jpg'
        );
 
 -- New Ingredients only
@@ -103,7 +103,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 
 -- Recipe 4
 -- Insert Recipe 4
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Almond Florandine',
            3,
@@ -112,7 +112,7 @@ VALUES (
            'Bake in a wood-fired oven or hearth',
            8,
            'https://lostkitchenscrolls.org/cookbook-of-mary-cruso-and-timothy-cruso-manuscri-bib193255-28-an-almond-florandine',
-           NULL
+           'almond_florandine.jpg'
        );
 
 -- New Ingredients only
@@ -139,7 +139,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 
 -- Recipe 5
 -- Insert Recipe 5
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Rice Pancakes',
            3,
@@ -148,7 +148,7 @@ VALUES (
            'Fry in a heavy iron skillet over a fire',
            6,
            'https://lostkitchenscrolls.org/cookbook-of-constance-hall-manuscript-bib226684-28-to-make-rice-pancakes',
-           NULL
+           'rice_pancakes.jpg'
        );
 
 -- Ingredients
@@ -166,7 +166,7 @@ INSERT INTO Recipe_Ingredients (Recipes_ID, Ingredients_ID, Quantity, Unit) VALU
 
 -- Recipe 6
 -- Insert Recipe 6
-INSERT INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
+INSERT OR REPLACE INTO Recipes (name, era_id, original_text, modernized_text, temperature_description, base_portion, sources, image_url)
 VALUES (
            'Mackerons',
            3,
@@ -175,7 +175,7 @@ VALUES (
            'Back them on shets of tin in a hot wood-fired oven',
            18,
            'https://lostkitchenscrolls.org/medicinal-and-cookery-recipes-manuscript-bib230663-27-to-make-mackerons',
-           NULL
+           'mackerons.jpg'
        );
 
 -- No new ingredients needed
