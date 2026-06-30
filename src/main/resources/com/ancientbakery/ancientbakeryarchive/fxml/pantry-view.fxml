@@ -19,7 +19,7 @@
         <Label text="Your Pantry" styleClass="sidebar-title"/>
         <Label text="Check what you have:" styleClass="sidebar-subtitle" wrapText="true"/>
 
-        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="conversions-scroll">
             <VBox fx:id="ingredientCheckboxPane" spacing="6">
                 <padding>
                     <Insets top="8" right="8" bottom="8" left="8"/>
