@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.ancientbakery.ancientbakeryarchive.ModernController"
@@ -68,9 +69,15 @@
         </Tab>
 
         <Tab text="PICTURES">
-            <StackPane styleClass="parchment-modern">
-                <Label text="Pictures coming soon" styleClass="recipe-title"/>
-            </StackPane>
+            <VBox alignment="CENTER" spacing="20"
+                  style="-fx-background-color: #f6ead0;">
+
+                <ImageView fx:id="recipeImageView"
+                           fitWidth="550"
+                           fitHeight="400"
+                           preserveRatio="true"/>
+
+            </VBox>
         </Tab>
 
         <Tab text="HISTORY">
