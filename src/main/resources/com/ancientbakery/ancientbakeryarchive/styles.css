@@ -75,7 +75,7 @@
 }
 
 .era-sidebar{
-    -fx-background-color: #afa28e;
+    -fx-background-color: rgba(243, 234, 208, 0.85);
     -fx-background-radius: 0;
 }
 
@@ -147,37 +147,49 @@
 
 .parchment-renaissance {
     -fx-background-color: #f3ead0;
-    -fx-background-image: url('images/Renaissance_era.png');
+    -fx-background-image: url('images/ren_bg.jpg');
     -fx-background-size: cover;
 }
 
 .parchment-industrial{
     -fx-background-color: #f3ead0;
-    -fx-background-image: url('images/Industrial_era.png');
+    -fx-background-image: url('images/ind_bg.jpg');
     -fx-background-size: cover;
 }
 
 .parchment-20thCent{
     -fx-background-color: #f3ead0;
-    -fx-background-image: url('images/Cent_20th.png');
+    -fx-background-image: url('images/20th_bg.jpg');
     -fx-background-size: cover;
 }
 
 .parchment-modern{
     -fx-background-color: #f3ead0;
-    -fx-background-image: url('images/Modern_era.png');
+    -fx-background-image: url('images/modern_bg.jpg');
     -fx-background-size: cover;
     -fx-background-position: center;
 }
 
 .conversions-panel {
-    -fx-background-color: #e6d3ab;
+        -fx-background-color: linear-gradient(rgba(243, 234, 208, 0.80), rgba(243, 234, 208, 0.80));
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+}
+
+.conversions-panel > .scroll-pane,
+.conversions-panel .scroll-pane > .viewport {
+    -fx-background-color: transparent;
 }
 
 .conversions-scroll {
     -fx-background-color: transparent;
     -fx-background: #e6d3ab;
     -fx-border-color: transparent;
+}
+
+.conversions-scrolls > .viewport {
+    -fx-background-color: transparent;
 }
 
 .conversions-title {
@@ -292,7 +304,7 @@
 
 .recipe-subtitle {
     -fx-font-family: "Georgia";
-    -fx-font-size: 15px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #4a3423;
 }
@@ -306,9 +318,22 @@
 
 .recipe-output-area {
     -fx-font-family: "Georgia";
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-control-inner-background: rgba(255, 248, 224, 0.90);
     -fx-text-fill: #2b1d12;
+}
+
+.recipe-output-area .content {
+    -fx-background-color: #FFF8E0F2;
+}
+
+.recipe-output-area .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.recipe-output-area:focused {
+    -fx-background-color: #FFF8E0F2;
+    -fx-background-insets: 0;
 }
 
 .pantry-screen{
@@ -339,7 +364,7 @@
 
 .ingredient-cb{
     -fx-font-family: "Georgia";
-    -fx-font-size: 13px;
+    -fx-font-size: 15px;
     -fx-text-fill: #2b1d12;
 }
 .match-badge {
@@ -560,6 +585,25 @@
         -fx-border-width: 3;
     }
 
+    .cent20th-clean-page{
+        -fx-background-color: #f3ead0;
+        -fx-background-image: url('images/20th_bg.jpg');
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-border-color: #2e2118;
+        -fx-border-width: 3;
+    }
+
+    .modern-clean-page{
+        -fx-background-color: #f3ead0;
+        -fx-background-image: url('images/modern_bg.jpg');
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-border-color: #2e2118;
+        -fx-border-width: 3;
+    }
     .solid-readable-panel {
         -fx-background-color: rgba(248, 239, 216, 0.93);
         -fx-border-color: #4a3423;
