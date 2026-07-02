@@ -27,12 +27,13 @@
 
     </VBox>
 
-    <TabPane AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
+    <TabPane fx:id="eraTabPane"
+             AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
         <Tab text="RECIPES">
-            <BorderPane styleClass="parchment-ancient" minWidth="0.0" minHeight="0.0">
+            <BorderPane styleClass="ancient-clean-page" minWidth="0.0" minHeight="0.0">
                 <top>
                     <VBox fx:id="eraTitleBox" alignment="CENTER" maxWidth="560"
                           spacing="4" styleClass="era-intro-overlay"
@@ -69,19 +70,34 @@
             </BorderPane>
         </Tab>
 
-        <Tab text="PICTURES">
-            <StackPane styleClass="parchment-ancient">
-                <VBox alignment="CENTER" spacing="20" style="-fx-background-color: #f6ead0;">
+        <Tab text="PICTURES" fx:id="picturesTab">
+            <StackPane styleClass="ancient-clean-page">
+                <VBox alignment="CENTER"
+                      spacing="18"
+                      styleClass="picture-card">
+
+                    <VBox alignment="CENTER" spacing="2">
+                        <Label fx:id="pictureRecipeTitle"
+                               text="Select a recipe"
+                               styleClass="picture-title"/>
+
+                        <Label fx:id="pictureEraLabel"
+                               text=""
+                               styleClass="picture-era"/>
+                    </VBox>
+
                     <ImageView fx:id="recipeImageView"
-                               fitWidth="550"
-                               fitHeight="400"
-                               preserveRatio="true"/>
+                               fitWidth="600"
+                               fitHeight="360"
+                               preserveRatio="true"
+                               smooth="true"
+                               styleClass="picture-image"/>
                 </VBox>
             </StackPane>
         </Tab>
 
         <Tab text="HISTORY">
-            <StackPane styleClass="parchment-ancient">
+            <StackPane styleClass="ancient-clean-page">
                 <padding>
                     <Insets top="20" right="20" bottom="20" left="20"/>
                 </padding>
