@@ -565,6 +565,27 @@
         -fx-padding: 6;
     }
 
+
+    .ancient-clean-page {
+        -fx-background-color: #f3ead0;
+        -fx-background-image: url('images/Ancient_bg.jpg');
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-border-color: #2e2118;
+        -fx-border-width: 3;
+    }
+
+    .medieval-clean-page {
+        -fx-background-color: #f3ead0;
+        -fx-background-image: url('images/medieval_bg.png');
+        -fx-background-size: cover;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+        -fx-border-color: #2e2118;
+        -fx-border-width: 3;
+    }
+
     .renaissance-clean-page {
         -fx-background-color: #f3ead0;
         -fx-background-image: url('images/ren_bg.jpg');
