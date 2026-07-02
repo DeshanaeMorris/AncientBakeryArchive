@@ -50,11 +50,12 @@ public abstract class EraRecipeController extends BaseNavigator {
     private Label pictureEraLabel;
 
     private static List<Glossary> glossaryTerms;
-
     private final RecipeRepository recipeRepository = new RecipeRepository();
     private VBox selectedCard;
 
     protected abstract int getEraId();
+
+    public static int defaultTab = 0; // 0=RECIPES, 1=PICTURES, 2=HISTORY
 
     @FXML
     public void initialize() {
@@ -88,6 +89,8 @@ public abstract class EraRecipeController extends BaseNavigator {
 
         String eraName = era == null ? "Historical Era" : safeText(era.getName(), "Historical Era");
         String timePeriod = era == null ? "" : safeText(era.getTimePeriod(), "");
+
+        AnalyticsHubController.sourceEra = eraName;
 
         Label title = new Label(eraName + " Recipes");
         title.getStyleClass().add("era-intro-title");
