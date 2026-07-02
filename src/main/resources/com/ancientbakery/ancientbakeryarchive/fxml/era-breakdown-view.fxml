@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.ancientbakery.ancientbakeryarchive.EraBreakdownController"
+            stylesheets="@../styles.css"
+            styleClass="era-screen"
+            prefHeight="600.0" prefWidth="800.0"
+            minHeight="500.0" minWidth="700.0">
+
+    <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0"
+          AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
+          styleClass="conversions-panel" spacing="20">
+        <padding>
+            <Insets top="18" right="14" bottom="14" left="14"/>
+        </padding>
+
+        <Label text="Era Ingredient Breakdown" styleClass="recipe-title-small"/>
+
+        <Button text="← Back" styleClass="sidebar-link"
+                prefWidth="100" prefHeight="36"
+                onAction="#goBack"/>
+
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="Select Era:" styleClass="recipe-subtitle"/>
+            <ComboBox fx:id="eraSelector" onAction="#onEraSelected"
+                      promptText="Choose an era..."/>
+        </HBox>
+
+        <PieChart fx:id="breakdownChart" VBox.vgrow="ALWAYS"
+                  title="Ingredient Category Breakdown"/>
+
+    </VBox>
+</AnchorPane>

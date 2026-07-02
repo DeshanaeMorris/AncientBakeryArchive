@@ -3,12 +3,16 @@ package com.ancientbakery.ancientbakeryarchive;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 
 import java.util.Map;
 
 public class AnalyticsHubController extends BaseNavigator {
     private final RecipeRepository recipeRepository = new RecipeRepository();
 
+    public static String sourceEra = "Ancient"; // fallback default
+
+    @FXML private TabPane standaloneTabPane;
     @FXML private Label totalRecipesLabel;
     @FXML private Label totalErasLabel;
 
@@ -19,6 +23,31 @@ public class AnalyticsHubController extends BaseNavigator {
             totalRecipesLabel.setText(String.valueOf(globalStats.getOrDefault("totalRecipes", 0)));
             totalErasLabel.setText(String.valueOf(globalStats.getOrDefault("totalEras", 0)));
         }
+        if (standaloneTabPane != null) {
+            standaloneTabPane.getSelectionModel().selectLast();
+
+            standaloneTabPane.getSelectionModel().selectedIndexProperty().addListener(
+                    (obs, oldIndex, newIndex) -> {
+                        if (newIndex.intValue() < 3) {
+                            try {
+                                javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                                        getClass().getResource(
+                                                "/com/ancientbakery/ancientbakeryarchive/fxml/ancient-view.fxml"));
+                                javafx.scene.Parent root = loader.load();
+                                javafx.stage.Stage stage = (javafx.stage.Stage) standaloneTabPane.getScene().getWindow();
+                                BaseNavigator.setResponsiveScene(stage, root);
+                            } catch (java.io.IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+            );
+        }
+    }
+
+    @FXML
+    public void goEraBreakdown(ActionEvent event) {
+        goTo(event, "era-breakdown-view.fxml");
     }
 
     @FXML
