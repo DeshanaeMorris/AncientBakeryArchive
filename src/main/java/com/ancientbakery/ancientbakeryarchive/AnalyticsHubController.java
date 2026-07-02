@@ -30,4 +30,9 @@ public class AnalyticsHubController extends BaseNavigator {
     public void goSweeteners(ActionEvent event) {
         goTo(event, "sweetener-graph-view.fxml");
     }
+
+    @FXML
+    public void goYeastTimeline(ActionEvent event) {
+        goTo(event, "yeast-timeline-view.fxml");
+    }
 }
