@@ -647,7 +647,7 @@
 
 .solid-readable-panel {
     -fx-background-color: #e9dcba;
-    -fx-border-color: #c9a868;
+    -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-padding: 18;
     -fx-background-radius: 14;
