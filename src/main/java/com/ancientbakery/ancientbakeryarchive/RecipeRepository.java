@@ -346,6 +346,36 @@ public class RecipeRepository {
         return results;
     }
 
+    public Map<String, Integer> getIngredientCategoryBreakdown(String eraName) {
+        Map<String, Integer> breakdown = new LinkedHashMap<>();
+        String sql = """
+            SELECT i.category, COUNT(*) AS usage_count
+            FROM Eras e
+            JOIN Recipes r ON e.id = r.era_id
+            JOIN Recipe_Ingredients ri ON r.id = ri.Recipes_ID
+            JOIN Ingredients i ON ri.Ingredients_ID = i.id
+            WHERE e.name = ?
+            AND i.category IS NOT NULL
+            GROUP BY i.category
+            ORDER BY usage_count DESC
+            """;
+
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, eraName);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    breakdown.put(rs.getString("category"), rs.getInt("usage_count"));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error fetching ingredient breakdown: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return breakdown;
+    }
+
     public List<Glossary> findAllGlossaryTerms() {
         List<Glossary> terms = new ArrayList<>();
         String sql = "SELECT id, Term, Definition, Modern_Substitute FROM Glossary";
