@@ -21,8 +21,6 @@
 
         <Label text="Cooking Fat Frequency Leaderboard" styleClass="recipe-title-small"/>
 
-        <Label text="Cooking Fat Frequency Leaderboard" styleClass="recipe-title-small"/>
-
         <Button text="← Back" styleClass="sidebar-link"
                 prefWidth="100" prefHeight="36"
                 onAction="#goBack"/>

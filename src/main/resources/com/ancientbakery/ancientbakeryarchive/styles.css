@@ -9,6 +9,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
+
 .welcome-button {
     -fx-background-color: #d0bb95;
     -fx-text-fill: #3a2a1c;
@@ -30,14 +31,15 @@
     -fx-border-radius: 24;
 }
 
-.welcome-button:hover{
+.welcome-button:hover {
     -fx-background-color: #e0d0ab;
 }
+
 .welcome-button:pressed {
     -fx-background-color: #bfa87f;
 }
 
-.contents-screen{
+.contents-screen {
     -fx-background-color: #b38e72;
     -fx-background-image: url('images/background.png');
     -fx-background-size: cover;
@@ -45,7 +47,7 @@
     -fx-background-repeat: no-repeat;
 }
 
-.contents-card{
+.contents-card {
     -fx-background-color: #b38e72;
     -fx-background-radius: 20;
     -fx-border-color: #f7f1e3;
@@ -53,7 +55,7 @@
     -fx-border-radius: 20;
 }
 
-.contents-link{
+.contents-link {
     -fx-background-color: transparent;
     -fx-text-fill: #271d15;
     -fx-font-size: 24px;
@@ -62,11 +64,11 @@
     -fx-cursor: hand;
 }
 
-.contents-link:hover{
+.contents-link:hover {
     -fx-text-fill: #5a3d28;
 }
 
-.era-screen{
+.era-screen {
     -fx-background-color: #b38e72;
     -fx-background-image: url('images/background.png');
     -fx-background-size: cover;
@@ -74,12 +76,12 @@
     -fx-background-repeat: no-repeat;
 }
 
-.era-sidebar{
+.era-sidebar {
     -fx-background-color: rgba(243, 234, 208, 0.85);
     -fx-background-radius: 0;
 }
 
-.sidebar-link{
+.sidebar-link {
     -fx-background-color: transparent;
     -fx-text-fill: #271d15;
     -fx-font-size: 18px;
@@ -151,19 +153,19 @@
     -fx-background-size: cover;
 }
 
-.parchment-industrial{
+.parchment-industrial {
     -fx-background-color: #f3ead0;
     -fx-background-image: url('images/ind_bg.jpg');
     -fx-background-size: cover;
 }
 
-.parchment-20thCent{
+.parchment-20thCent {
     -fx-background-color: #f3ead0;
     -fx-background-image: url('images/20th_bg.jpg');
     -fx-background-size: cover;
 }
 
-.parchment-modern{
+.parchment-modern {
     -fx-background-color: #f3ead0;
     -fx-background-image: url('images/modern_bg.jpg');
     -fx-background-size: cover;
@@ -171,10 +173,10 @@
 }
 
 .conversions-panel {
-        -fx-background-color: linear-gradient(rgba(243, 234, 208, 0.80), rgba(243, 234, 208, 0.80));
-        -fx-background-size: cover;
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
+    -fx-background-color: linear-gradient(rgba(243, 234, 208, 0.80), rgba(243, 234, 208, 0.80));
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
 }
 
 .conversions-panel > .scroll-pane,
@@ -321,35 +323,46 @@
     -fx-font-size: 16px;
     -fx-control-inner-background: rgba(255, 248, 224, 0.90);
     -fx-text-fill: #2b1d12;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
 }
 
 .recipe-output-area .content {
     -fx-background-color: #FFF8E0F2;
+    -fx-background-radius: 12;
+}
+
+.recipe-output-area .scroll-pane{
+    -fx-background-color: #FFF8E0F2;
+    -fx-background-radius: 12;
+    -fx-border-color: transparent;
 }
 
 .recipe-output-area .scroll-pane > .viewport {
-    -fx-background-color: transparent;
+    -fx-background-color: #FFF8E0F2;
+    -fx-background-radius: 12;
 }
 
 .recipe-output-area:focused {
     -fx-background-color: #FFF8E0F2;
     -fx-background-insets: 0;
+    -fx-background-radius: 12;
 }
 
-.pantry-screen{
-        -fx-background-color: #e5d2aa;
-        -fx-background-image: url('images/background.png');
-        -fx-background-size: cover;
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
+.pantry-screen {
+    -fx-background-color: #e5d2aa;
+    -fx-background-image: url('images/background.png');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
 }
 
-.pantry-sidebar{
+.pantry-sidebar {
     -fx-background-color: #aea18d;
     -fx-spacing: 10px;
 }
 
-.sidebar-title{
+.sidebar-title {
     -fx-font-family: "Georgia";
     -fx-font-size: 18px;
     -fx-font-weight: bold;
@@ -362,14 +375,15 @@
     -fx-text-fill: #3a2a1c;
 }
 
-.ingredient-cb{
+.ingredient-cb {
     -fx-font-family: "Georgia";
     -fx-font-size: 15px;
     -fx-text-fill: #2b1d12;
 }
+
 .match-badge {
     -fx-background-color: #2e2118;
-    -fx-text-fill: #e8d5a3;
+    -fx-text-fill: #ccc2ab;
     -fx-padding: 4px 12px;
     -fx-background-radius: 20;
     -fx-font-size: 12px;
@@ -469,144 +483,172 @@
     -fx-background-color: #ddc794;
     /* UI polish for Renaissance and Industrial recipe screens */
 }
-    .clean-recipe-page {
-        -fx-background-color: #f3ead0;
-        -fx-border-color: #2e2118;
-        -fx-border-width: 3;
-    }
 
-    .recipe-card {
-        -fx-background-color: #f8efd8;
-        -fx-background-radius: 14;
-        -fx-border-color: #4a3423;
-        -fx-border-radius: 14;
-        -fx-border-width: 2;
-        -fx-pref-width: 620;
-        -fx-max-width: 760;
-    }
+.clean-recipe-page {
+    -fx-background-color: #f3ead0;
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
 
-    .recipe-card:hover {
-        -fx-background-color: #fff7e4;
-        -fx-cursor: hand;
-    }
+.recipe-card {
+    -fx-background-color: #f8efd8;
+    -fx-background-radius: 14;
+    -fx-border-color: #4a3423;
+    -fx-border-radius: 14;
+    -fx-border-width: 2;
+    -fx-pref-width: 620;
+    -fx-max-width: 760;
+}
 
-    .recipe-card-selected {
-        -fx-border-color: #2e2118;
-        -fx-border-width: 3;
-    }
+.recipe-card:hover {
+    -fx-background-color: #fff7e4;
+    -fx-cursor: hand;
+}
 
-    .recipe-card-title {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 22px;
-        -fx-font-weight: bold;
-        -fx-text-fill: #2b1d12;
-    }
+.recipe-card-selected {
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
 
-    .recipe-meta {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 17px;
-        -fx-font-weight: bold;
-        -fx-text-fill: #3a2a1c;
-    }
+.recipe-card-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+}
 
-    .recipe-body {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 16px;
-        -fx-text-fill: #2b1d12;
-        -fx-line-spacing: 3;
-    }
+.recipe-meta {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3a2a1c;
+}
 
-    .era-intro-title {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 28px;
-        -fx-font-weight: bold;
-        -fx-text-fill: #2b1d12;
-    }
+.recipe-body {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 16px;
+    -fx-text-fill: #2b1d12;
+    -fx-line-spacing: 3;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
 
-    .era-intro-dates {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 17px;
-        -fx-font-weight: bold;
-        -fx-text-fill: #4a3423;
-    }
+.recipe-body .content {
+    -fx-background-color: #e9dcba;
+    -fx-background-radius: 12;
+}
 
-    .picture-card {
-        -fx-background-color: rgba(248, 239, 216, 0.65);
-        -fx-border-color: #4a3423;
-        -fx-border-width: 2;
-        -fx-padding: 20;
-        -fx-max-width: 760;
-    }
+.recipe-body:focused {
+    -fx-background-color: #e9dcba;
+    -fx-background-insets: 0;
+}
 
-    .picture-title {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 26px;
-        -fx-font-weight: bold;
-        -fx-text-fill: #2b1d12;
-    }
+.recipe-body .scroll-pane {
+    -fx-background-color: #e9dcba;
+    -fx-background-radius: 12;
+    -fx-border-color: transparent;
+}
 
-    .picture-note {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 14px;
-        -fx-text-fill: #5a3d28;
-    }
+.recipe-body .scroll-pane > .viewport {
+    -fx-background-color: #e9dcba;
+    -fx-background-radius: 12;
+}
 
-    .picture-era {
-        -fx-font-family: "Georgia";
-        -fx-font-size: 16px;
-        -fx-font-weight: bold;
-        -fx-text-fill: #6e4f2f;
-    }
+.era-intro-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+}
 
-    .picture-image {
-        -fx-border-color: #4a3423;
-        -fx-border-width: 2;
-        -fx-background-color: white;
-        -fx-padding: 6;
-    }
+.era-intro-dates {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a3423;
+}
 
-    .renaissance-clean-page {
-        -fx-background-color: #f3ead0;
-        -fx-background-image: url('images/ren_bg.jpg');
-        -fx-background-size: cover;
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
-        -fx-border-color: #2e2118;
-        -fx-border-width: 3;
-    }
+.picture-card {
+    -fx-background-color: rgba(248, 239, 216, 0.65);
+    -fx-border-color: #4a3423;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-max-width: 760;
+}
 
-    .industrial-clean-page {
-        -fx-background-color: #f3ead0;
-        -fx-background-image: url('images/ind_bg.jpg');
-        -fx-background-size: cover;
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
-        -fx-border-color: #2e2118;
-        -fx-border-width: 3;
-    }
+.picture-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b1d12;
+}
 
-    .cent20th-clean-page{
-        -fx-background-color: #f3ead0;
-        -fx-background-image: url('images/20th_bg.jpg');
-        -fx-background-size: cover;
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
-        -fx-border-color: #2e2118;
-        -fx-border-width: 3;
-    }
+.picture-note {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-text-fill: #5a3d28;
+}
 
-    .modern-clean-page{
-        -fx-background-color: #f3ead0;
-        -fx-background-image: url('images/modern_bg.jpg');
-        -fx-background-size: cover;
-        -fx-background-position: center;
-        -fx-background-repeat: no-repeat;
-        -fx-border-color: #2e2118;
-        -fx-border-width: 3;
-    }
-    .solid-readable-panel {
-        -fx-background-color: rgba(248, 239, 216, 0.93);
-        -fx-border-color: #4a3423;
-        -fx-border-width: 2;
-        -fx-padding: 18;
-    }
+.picture-era {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6e4f2f;
+}
+
+.picture-image {
+    -fx-border-color: #4a3423;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-padding: 6;
+}
+
+.renaissance-clean-page {
+    -fx-background-color: #f3ead0;
+    -fx-background-image: url('images/ren_bg.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
+
+.industrial-clean-page {
+    -fx-background-color: #f3ead0;
+    -fx-background-image: url('images/ind_bg.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
+
+.cent20th-clean-page {
+    -fx-background-color: #f3ead0;
+    -fx-background-image: url('images/20th_bg.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
+
+.modern-clean-page {
+    -fx-background-color: #f3ead0;
+    -fx-background-image: url('images/modern_bg.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-border-color: #2e2118;
+    -fx-border-width: 3;
+}
+
+.solid-readable-panel {
+    -fx-background-color: #e9dcba;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-padding: 18;
+    -fx-background-radius: 14;
+}
