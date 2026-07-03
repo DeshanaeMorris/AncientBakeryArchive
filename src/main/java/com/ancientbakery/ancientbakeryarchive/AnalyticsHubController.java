@@ -86,4 +86,29 @@ public class AnalyticsHubController extends BaseNavigator {
     public void goYeastTimeline(ActionEvent event) {
         goTo(event, "yeast-timeline-view.fxml");
     }
+
+    @FXML
+    public void goBack(ActionEvent event) {
+        if (!AppState.hasSelectedRecipe()) {
+            goTo(event, "contents-view.fxml");
+            return;
+        }
+        RecipeRepository repo = new RecipeRepository();
+        var recipe = repo.findRecipeById(AppState.getSelectedRecipeId());
+        if (recipe == null) {
+            goTo(event, "contents-view.fxml");
+            return;
+        }
+        String fxml = switch (recipe.getEraId()) {
+            case 1 -> "ancient-view.fxml";
+            case 2 -> "medieval-view.fxml";
+            case 3 -> "renaissance-view.fxml";
+            case 4 -> "industrial-view.fxml";
+            case 5 -> "century20th-view.fxml";
+            case 6 -> "modern-view.fxml";
+            default -> "contents-view.fxml";
+        };
+        goTo(event, fxml);
+    }
+
 }
