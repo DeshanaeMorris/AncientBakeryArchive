@@ -32,6 +32,18 @@
                 <Label text="Eras Covered" style="-fx-font-size: 14; -fx-text-fill: #8a7560;"/>
                 <Label fx:id="totalErasLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
             </VBox>
+
+            <VBox styleClass="analytics-card" alignment="CENTER" spacing="5"
+                  prefWidth="160" prefHeight="80">
+                <Label text="Most Complex Recipe" style="-fx-font-size: 13; -fx-text-fill: #8a7560;"/>
+                <Label fx:id="complexRecipeLabel" text="N/A" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #3b2314;" wrapText="true" alignment="CENTER"/>
+            </VBox>
+
+            <VBox styleClass="analytics-card" alignment="CENTER" spacing="5"
+                  prefWidth="160" prefHeight="80">
+            <Label text="Top Archive Ingredient" style="-fx-font-size: 13; -fx-text-fill: #8a7560;"/>
+            <Label fx:id="ancientIngredientLabel" text="N/A" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #3b2314;" wrapText="true" alignment="CENTER"/>
+            </VBox>
         </HBox>
 
         <Separator />

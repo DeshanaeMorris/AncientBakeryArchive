@@ -13,11 +13,33 @@ public class AnalyticsHubController extends BaseNavigator {
     @FXML private Label totalErasLabel;
 
     @FXML
+    private Label complexRecipeLabel;
+    @FXML
+    private Label ancientIngredientLabel;
+
+    @FXML
     public void initialize() {
-        Map<String, Integer> globalStats = recipeRepository.getGlobalArchiveStats();
+        Map<String, Object> globalStats = recipeRepository.getGlobalArchiveStats();
         if (globalStats != null) {
-            totalRecipesLabel.setText(String.valueOf(globalStats.getOrDefault("totalRecipes", 0)));
-            totalErasLabel.setText(String.valueOf(globalStats.getOrDefault("totalEras", 0)));
+
+            if (totalRecipesLabel != null) {
+                totalRecipesLabel.setText(String.valueOf(globalStats.getOrDefault("totalRecipes", 0)));
+            }
+            if (totalErasLabel != null) {
+                totalErasLabel.setText(String.valueOf(globalStats.getOrDefault("totalEras", 0)));
+            }
+
+            if (complexRecipeLabel != null) {
+                complexRecipeLabel.setText(String.valueOf(globalStats.getOrDefault("complexRecipe", "N/A")));
+            }
+
+            if (ancientIngredientLabel != null) {
+                String ancientIngredient = String.valueOf(globalStats.getOrDefault("mostCommonAncient", "N/A"));
+                if (!ancientIngredient.equals("N/A") && !ancientIngredient.isEmpty()) {
+                    ancientIngredient = ancientIngredient.substring(0, 1).toUpperCase() + ancientIngredient.substring(1);
+                }
+                ancientIngredientLabel.setText(ancientIngredient);
+            }
         }
     }
 

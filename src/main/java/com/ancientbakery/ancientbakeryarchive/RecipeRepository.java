@@ -236,11 +236,23 @@ public class RecipeRepository {
         return timeline;
     }
 
-    public Map<String, Integer> getGlobalArchiveStats() {
-        Map<String, Integer> stats = new HashMap<>();
+    public Map<String, Object> getGlobalArchiveStats() {
+        Map<String, Object> stats = new HashMap<>();
 
         String totalRecipesSql = "SELECT COUNT(*) FROM Recipes";
         String totalErasSql = "SELECT COUNT(*) FROM Eras";
+
+        String complexRecipeSql = "SELECT r.name, COUNT(ri.Ingredients_ID) AS ingredient_count " +
+                "FROM Recipes r " +
+                "JOIN Recipe_Ingredients ri ON r.id = ri.Recipes_ID " +
+                "GROUP BY r.id " +
+                "ORDER BY ingredient_count DESC LIMIT 1";
+
+        String topIngredientSql = "SELECT i.name, COUNT(ri.Ingredients_ID) AS usage_count " +
+                "FROM Recipe_Ingredients ri " +
+                "JOIN Ingredients i ON ri.Ingredients_ID = i.id " +
+                "GROUP BY i.id " +
+                "ORDER BY usage_count DESC LIMIT 1";
 
         try (Connection conn = DatabaseManager.getConnection()) {
 
@@ -257,6 +269,23 @@ public class RecipeRepository {
                  ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
                     stats.put("totalEras", rs.getInt(1));
+                }
+            }
+
+            try (PreparedStatement pst = conn.prepareStatement(complexRecipeSql);
+                 ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("complexRecipe", rs.getString("name"));
+                } else {
+                    stats.put("complexRecipe", "N/A");
+                }
+            }
+            try (PreparedStatement pst = conn.prepareStatement(topIngredientSql);
+                 ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("mostCommonAncient", rs.getString("name")); // Kept this map key name so your Controller doesn't break!
+                } else {
+                    stats.put("mostCommonAncient", "N/A");
                 }
             }
 
@@ -349,11 +378,11 @@ public class RecipeRepository {
                 "JOIN Ingredients i ON ri.Ingredients_ID = i.id " +
                 "WHERE LOWER(i.name) LIKE LOWER(?) " +
                 "GROUP BY e.id " +
-                "ORDER BY usage_count DESC;";
+                "ORDER BY e.id ASC;";
 
         try (java.sql.Connection conn = DatabaseManager.getConnection();
              java.sql.PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, fatName);
+            pstmt.setString(1, "%" + fatName.trim() + "%");
             java.sql.ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 breakdown.put(rs.getString("era_name"), rs.getInt("usage_count"));
