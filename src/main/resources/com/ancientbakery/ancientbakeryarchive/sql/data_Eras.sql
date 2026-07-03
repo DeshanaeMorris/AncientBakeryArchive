@@ -13,8 +13,7 @@ UPDATE Eras SET history_text = 'Baking in the Ancient Era saw the transition fro
                                'Sweet baking was simple but popular, consisting of honey-soaked cakes like the Roman libum (a dense cheese-and-flour cake baked on bay leaves) ' ||
                                'and flatbreads brushed with olive oil and wild herbs.' WHERE id = 1;
 
-UPDATE Eras SET history_text = 'In the Middle Ages, baking was strictly regulated by the crown to prevent fraud, and what kind of bread you ate was the indicator of your social standing in the hierarchy. ' ||
-                               'The nobility consumed manchet, a meticulously bolted (sifted) fine white wheat bread that was light and airy. ' ||
+UPDATE Eras SET history_text = 'In the Middle Ages, baking was strictly regulated by the crown to prevent fraud, and what kind of bread you ate was the indicator of your social standing in the hierarchy. The nobility consumed manchet, a meticulously bolted (sifted) fine white wheat bread that was light and airy. ' ||
                                'The working peasant class ate maslin or tourte, a heavy, dark, coarse bread made from a field-mix of rye, barley, and chaff. Because ovens were expensive and a massive fire hazard, communal village ovens were standard, where peasants paid a fee to have the village baker bake their dough. ' ||
                                'Sweet pastries were functional rather than soft or delicate. ' WHERE id = 2;
 

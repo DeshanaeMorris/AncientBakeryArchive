@@ -126,6 +126,7 @@ public class RecipeRepository {
         recipe.setImageUrl(result.getString("image_url"));
         return recipe;
     }
+
     public String getHistoryByEraId(int eraId) {
         String sql = "SELECT history_text FROM Eras WHERE id = ?";
         try (Connection conn = DatabaseManager.getConnection();
@@ -142,6 +143,7 @@ public class RecipeRepository {
         }
         return "No historical context available for this era.";
     }
+
     public Map<String, Integer> getCookingFatRankings() {
         Map<String, Integer> rankings = new LinkedHashMap<>();
         String[] fats = {"Butter", "Oil", "Lard", "Suet", "Fat"};
@@ -234,11 +236,23 @@ public class RecipeRepository {
         return timeline;
     }
 
-    public Map<String, Integer> getGlobalArchiveStats() {
-        Map<String, Integer> stats = new HashMap<>();
+    public Map<String, Object> getGlobalArchiveStats() {
+        Map<String, Object> stats = new HashMap<>();
 
         String totalRecipesSql = "SELECT COUNT(*) FROM Recipes";
         String totalErasSql = "SELECT COUNT(*) FROM Eras";
+
+        String complexRecipeSql = "SELECT r.name, COUNT(ri.Ingredients_ID) AS ingredient_count " +
+                "FROM Recipes r " +
+                "JOIN Recipe_Ingredients ri ON r.id = ri.Recipes_ID " +
+                "GROUP BY r.id " +
+                "ORDER BY ingredient_count DESC LIMIT 1";
+
+        String topIngredientSql = "SELECT i.name, COUNT(ri.Ingredients_ID) AS usage_count " +
+                "FROM Recipe_Ingredients ri " +
+                "JOIN Ingredients i ON ri.Ingredients_ID = i.id " +
+                "GROUP BY i.id " +
+                "ORDER BY usage_count DESC LIMIT 1";
 
         try (Connection conn = DatabaseManager.getConnection()) {
 
@@ -258,6 +272,23 @@ public class RecipeRepository {
                 }
             }
 
+            try (PreparedStatement pst = conn.prepareStatement(complexRecipeSql);
+                 ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("complexRecipe", rs.getString("name"));
+                } else {
+                    stats.put("complexRecipe", "N/A");
+                }
+            }
+            try (PreparedStatement pst = conn.prepareStatement(topIngredientSql);
+                 ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    stats.put("mostCommonAncient", rs.getString("name")); // Kept this map key name so your Controller doesn't break!
+                } else {
+                    stats.put("mostCommonAncient", "N/A");
+                }
+            }
+
         } catch (Exception e) {
             System.err.println("Error fetching global archive stats: " + e.getMessage());
             e.printStackTrace();
@@ -269,7 +300,7 @@ public class RecipeRepository {
     public List<Map<String, Object>> getSweetenerUsageByEra() {
         List<Map<String, Object>> results = new ArrayList<>();
         String sql = """
-            SELECT
+                SELECT
                 everything.era_name,
                 everything.sweetener_name,
                 COALESCE(real_counts.usage_count, 0) AS usage_count
@@ -367,5 +398,28 @@ public class RecipeRepository {
         }
 
         return terms;
+    }
+    public Map<String, Integer> getEraBreakdownForFat(String fatName) {
+        Map<String, Integer> breakdown = new java.util.LinkedHashMap<>();
+        String query = "SELECT e.name AS era_name, COUNT(DISTINCT r.id) AS usage_count " + // <--
+                "FROM Recipe_Ingredients ri " +
+                "JOIN Recipes r ON ri.Recipes_ID = r.id " +
+                "JOIN Eras e ON r.era_id = e.id " +
+                "JOIN Ingredients i ON ri.Ingredients_ID = i.id " +
+                "WHERE LOWER(i.name) LIKE LOWER(?) " +
+                "GROUP BY e.id " +
+                "ORDER BY e.id ASC;";
+
+        try (java.sql.Connection conn = DatabaseManager.getConnection();
+             java.sql.PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, "%" + fatName.trim() + "%");
+            java.sql.ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                breakdown.put(rs.getString("era_name"), rs.getInt("usage_count"));
+            }
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return breakdown;
     }
 }
