@@ -48,6 +48,6 @@ public class YeastTimelineController extends BaseNavigator {
 
     @FXML
     public void goBack(ActionEvent event) {
-        goTo(event, "analytics-hub-view.fxml");
+        goTo(event, "analytics-hub-standalone-view.fxml");
     }
 }
