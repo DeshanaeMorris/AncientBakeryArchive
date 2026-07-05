@@ -97,15 +97,26 @@
         </Tab>
 
         <Tab text="HISTORY">
-            <StackPane styleClass="ancient-clean-page">
-                <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
-                </padding>
-                <TextArea fx:id="historyTextArea"
-                          editable="false"
-                          wrapText="true"
-                          styleClass="recipe-body"
-                          maxWidth="720" />
+            <StackPane styleClass="parchment-ancient">
+                <VBox styleClass="solid-readable-panel"
+                      StackPane.alignment="CENTER"
+                      VBox.vgrow="ALWAYS"
+                      HBox.hgrow="ALWAYS"
+                      fillWidth="true"
+                      maxWidth="Infinity"
+                      maxHeight="Infinity">
+                    <StackPane.margin>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </StackPane.margin>
+
+                    <TextArea fx:id="historyTextArea"
+                              editable="false"
+                              wrapText="true"
+                              styleClass="recipe-body"
+                              maxWidth="Infinity"
+                              maxHeight="Infinity"
+                              VBox.vgrow="ALWAYS"/>
+                </VBox>
             </StackPane>
         </Tab>
 

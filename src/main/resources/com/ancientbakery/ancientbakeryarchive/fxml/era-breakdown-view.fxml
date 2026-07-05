@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.geometry.Insets?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.ancientbakery.ancientbakeryarchive.CookingFatsController"
+            fx:controller="com.ancientbakery.ancientbakeryarchive.EraBreakdownController"
             stylesheets="@../styles.css"
             styleClass="era-screen"
             prefHeight="600.0" prefWidth="800.0"
@@ -19,15 +20,20 @@
             <Insets top="18" right="14" bottom="14" left="14"/>
         </padding>
 
-        <Label text="Cooking Fat Frequency Leaderboard" styleClass="recipe-title-small"/>
+        <Label text="Era Ingredient Breakdown" styleClass="recipe-title-small"/>
 
         <Button text="← Back" styleClass="sidebar-link"
                 prefWidth="100" prefHeight="36"
                 onAction="#goBack"/>
 
-        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
-            <VBox fx:id="leaderboardContainer" spacing="8">
-            </VBox>
-        </ScrollPane>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Label text="Select Era:" styleClass="recipe-subtitle"/>
+            <ComboBox fx:id="eraSelector" onAction="#onEraSelected"
+                      promptText="Choose an era..."/>
+        </HBox>
+
+        <PieChart fx:id="breakdownChart" VBox.vgrow="ALWAYS"
+                  title="Ingredient Category Breakdown"/>
+
     </VBox>
 </AnchorPane>
