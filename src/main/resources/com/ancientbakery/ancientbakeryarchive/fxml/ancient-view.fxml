@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -13,8 +15,10 @@
             prefHeight="600.0" prefWidth="800.0"
             minHeight="500.0" minWidth="700.0">
 
+
     <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="58.0" AnchorPane.bottomAnchor="20.0"
           prefWidth="150" spacing="10" alignment="CENTER" styleClass="era-sidebar">
+
 
         <Button text="Ancient" styleClass="sidebar-link" onAction="#goAncient"/>
         <Button text="Medieval" styleClass="sidebar-link" onAction="#goMedieval"/>
@@ -23,14 +27,18 @@
         <Button text="20th Century" styleClass="sidebar-link" onAction="#go20thCent"/>
         <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
 
+
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
 
+
     </VBox>
+
 
     <TabPane fx:id="eraTabPane"
              AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
+
 
         <Tab text="RECIPES">
             <BorderPane styleClass="ancient-clean-page" minWidth="0.0" minHeight="0.0">
@@ -46,6 +54,7 @@
                         </padding>
                     </VBox>
                 </top>
+
 
                 <center>
                     <StackPane alignment="TOP_CENTER">
@@ -70,21 +79,25 @@
             </BorderPane>
         </Tab>
 
+
         <Tab text="PICTURES" fx:id="picturesTab">
             <StackPane styleClass="ancient-clean-page">
                 <VBox alignment="CENTER"
                       spacing="18"
                       styleClass="picture-card">
 
+
                     <VBox alignment="CENTER" spacing="2">
                         <Label fx:id="pictureRecipeTitle"
                                text="Select a recipe"
                                styleClass="picture-title"/>
 
+
                         <Label fx:id="pictureEraLabel"
                                text=""
                                styleClass="picture-era"/>
                     </VBox>
+
 
                     <ImageView fx:id="recipeImageView"
                                fitWidth="600"
@@ -95,6 +108,7 @@
                 </VBox>
             </StackPane>
         </Tab>
+
 
         <Tab text="HISTORY">
             <StackPane styleClass="parchment-ancient">
@@ -109,6 +123,7 @@
                         <Insets top="20" right="20" bottom="20" left="20"/>
                     </StackPane.margin>
 
+
                     <TextArea fx:id="historyTextArea"
                               editable="false"
                               wrapText="true"
@@ -120,6 +135,7 @@
             </StackPane>
         </Tab>
 
+
         <Tab text="ANALYTICS HUB">
             <StackPane styleClass="parchment-ancient">
                 <fx:include source="analytics-hub-view.fxml"/>
@@ -127,4 +143,6 @@
         </Tab>
     </TabPane>
 
+
 </AnchorPane>
+
