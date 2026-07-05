@@ -96,7 +96,7 @@
         </Tab>
 
         <Tab text="HISTORY">
-            <StackPane styleClass="parchment-medieval">
+            <StackPane styleClass="medieval-clean-page">
                 <VBox styleClass="solid-readable-panel"
                       StackPane.alignment="CENTER"
                       VBox.vgrow="ALWAYS"
