@@ -671,3 +671,14 @@
     -fx-padding: 18;
     -fx-background-radius: 14;
 }
+
+.history-placeholder-message {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 28px;
+    -fx-text-fill: #3b2416;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-line-spacing: 6px;
+    -fx-padding: 0px;
+}

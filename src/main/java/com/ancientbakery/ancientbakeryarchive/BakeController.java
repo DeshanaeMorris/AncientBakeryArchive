@@ -7,12 +7,13 @@ import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,8 +25,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import javafx.scene.control.Tab;
 
 public class BakeController extends BaseNavigator {
 
@@ -60,6 +59,9 @@ public class BakeController extends BaseNavigator {
     @FXML
     private Tab featuredPicturesTab;
 
+    @FXML
+    private ImageView historyPlaceholderIcon;
+
     private final RecipeRepository recipeRepository = new RecipeRepository();
 
     private Recipe selectedRecipe;
@@ -82,6 +84,7 @@ public class BakeController extends BaseNavigator {
 
         loadSelectedRecipe();
         loadRandomFeaturedRecipe();
+        loadHistoryPlaceholderImage();
 
         featuredPicturesTab.setOnSelectionChanged(event -> {
             if (featuredPicturesTab.isSelected()) {
@@ -169,6 +172,22 @@ public class BakeController extends BaseNavigator {
 
         Image image = new Image(imageStream);
         featuredRecipeImage.setImage(image);
+    }
+
+    private void loadHistoryPlaceholderImage() {
+        String imagePath =
+                "/com/ancientbakery/ancientbakeryarchive/images/parchment_scroll3.png";
+
+        var imageStream = getClass().getResourceAsStream(imagePath);
+
+        if (imageStream == null) {
+            historyPlaceholderIcon.setImage(null);
+            System.out.println("Could not find image: " + imagePath);
+            return;
+        }
+
+        Image image = new Image(imageStream);
+        historyPlaceholderIcon.setImage(image);
     }
 
     @FXML
