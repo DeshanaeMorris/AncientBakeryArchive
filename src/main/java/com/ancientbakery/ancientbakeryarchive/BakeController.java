@@ -6,40 +6,88 @@ import com.ancientbakery.ancientbakeryarchive.model.Recipe;
 import com.ancientbakery.ancientbakeryarchive.model.RecipeIngredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javafx.scene.control.Tab;
+
 public class BakeController extends BaseNavigator {
+
     private static final String ORIGINAL_UNITS = "Original Units";
     private static final String IMPERIAL_UNITS = "Imperial";
     private static final String METRIC_UNITS = "Metric";
 
-    @FXML private Label selectedRecipeLabel;
-    @FXML private Label statusLabel;
-    @FXML private TextField multiplierField;
-    @FXML private ComboBox<String> unitSystemBox;
-    @FXML private TextArea historicalRecipeText;
-    @FXML private TextArea modernRecipeText;
+    @FXML
+    private Label selectedRecipeLabel;
+
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private TextField multiplierField;
+
+    @FXML
+    private ComboBox<String> unitSystemBox;
+
+    @FXML
+    private TextArea historicalRecipeText;
+
+    @FXML
+    private TextArea modernRecipeText;
+
+    @FXML
+    private ImageView featuredRecipeImage;
+
+    @FXML
+    private Label featuredRecipeLabel;
+
+    @FXML
+    private Tab featuredPicturesTab;
 
     private final RecipeRepository recipeRepository = new RecipeRepository();
+
     private Recipe selectedRecipe;
+    private Recipe featuredRecipe;
+
     private List<RecipeIngredient> selectedIngredients = List.of();
 
     @FXML
     public void initialize() {
         multiplierField.setText("1");
-        unitSystemBox.getItems().setAll(ORIGINAL_UNITS, IMPERIAL_UNITS, METRIC_UNITS);
+
+        unitSystemBox.getItems().setAll(
+                ORIGINAL_UNITS,
+                IMPERIAL_UNITS,
+                METRIC_UNITS
+        );
+
         unitSystemBox.setValue(ORIGINAL_UNITS);
         unitSystemBox.setOnAction(event -> refreshRecipeDisplays());
 
         loadSelectedRecipe();
+        loadRandomFeaturedRecipe();
+
+        featuredPicturesTab.setOnSelectionChanged(event -> {
+            if (featuredPicturesTab.isSelected()) {
+                loadRandomFeaturedRecipe();
+            }
+        });
     }
 
     @FXML
@@ -69,6 +117,119 @@ public class BakeController extends BaseNavigator {
         selectedIngredients = recipeRepository.findIngredientsByRecipeId(selectedRecipe.getId());
         selectedRecipeLabel.setText(selectedRecipe.getName());
         refreshRecipeDisplays();
+    }
+
+    private void loadRandomFeaturedRecipe() {
+        List<Recipe> recipes = recipeRepository.findAllRecipes();
+
+        if (recipes.isEmpty()) {
+            featuredRecipeLabel.setText("No featured recipe available.");
+            featuredRecipeImage.setImage(null);
+            return;
+        }
+
+        Random random = new Random();
+        Recipe newFeaturedRecipe;
+
+        if (recipes.size() == 1) {
+            newFeaturedRecipe = recipes.get(0);
+        } else {
+            do {
+                int randomIndex = random.nextInt(recipes.size());
+                newFeaturedRecipe = recipes.get(randomIndex);
+            } while (featuredRecipe != null
+                    && newFeaturedRecipe.getId() == featuredRecipe.getId());
+        }
+
+        featuredRecipe = newFeaturedRecipe;
+
+        featuredRecipeLabel.setText(featuredRecipe.getName());
+        loadFeaturedRecipeImage();
+    }
+
+    private void loadFeaturedRecipeImage() {
+        String imageName = featuredRecipe.getImageUrl();
+
+        if (imageName == null || imageName.isBlank()) {
+            featuredRecipeImage.setImage(null);
+            System.out.println("No image listed for the featured recipe.");
+            return;
+        }
+
+        String imagePath =
+                "/com/ancientbakery/ancientbakeryarchive/images/" + imageName;
+
+        var imageStream = getClass().getResourceAsStream(imagePath);
+
+        if (imageStream == null) {
+            featuredRecipeImage.setImage(null);
+            System.out.println("Could not find image: " + imagePath);
+            return;
+        }
+
+        Image image = new Image(imageStream);
+        featuredRecipeImage.setImage(image);
+    }
+
+    @FXML
+    private void openFeaturedRecipe(MouseEvent event) {
+        if (featuredRecipe == null) {
+            return;
+        }
+
+        AppState.selectRecipeFromBakeNowPictures(featuredRecipe.getId());
+
+        String eraFile = getEraFile(featuredRecipe.getEraId());
+
+        if (eraFile == null) {
+            System.out.println(
+                    "Could not find an era screen for era ID: "
+                            + featuredRecipe.getEraId()
+            );
+            return;
+        }
+
+        openEraScreen(event, eraFile);
+    }
+
+    private String getEraFile(int eraId) {
+        if (eraId == 1) {
+            return "ancient-view.fxml";
+        } else if (eraId == 2) {
+            return "medieval-view.fxml";
+        } else if (eraId == 3) {
+            return "renaissance-view.fxml";
+        } else if (eraId == 4) {
+            return "industrial-view.fxml";
+        } else if (eraId == 5) {
+            return "century20th-view.fxml";
+        } else if (eraId == 6) {
+            return "modern-view.fxml";
+        }
+
+        return null;
+    }
+
+    private void openEraScreen(MouseEvent event, String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "/com/ancientbakery/ancientbakeryarchive/fxml/"
+                                    + fxmlFile
+                    )
+            );
+
+            Parent root = loader.load();
+
+            Node clickedItem = (Node) event.getSource();
+            Stage stage = (Stage) clickedItem.getScene().getWindow();
+
+            BaseNavigator.setResponsiveScene(stage, root);
+
+        } catch (IOException e) {
+            System.out.println("Could not open " + fxmlFile);
+            e.printStackTrace();
+        }
     }
 
     private void refreshRecipeDisplays() {
@@ -116,6 +277,7 @@ public class BakeController extends BaseNavigator {
         if (unitSystemBox == null || unitSystemBox.getValue() == null) {
             return ORIGINAL_UNITS;
         }
+
         return unitSystemBox.getValue();
     }
 
@@ -211,11 +373,16 @@ public class BakeController extends BaseNavigator {
         if (value == Math.rint(value)) {
             return String.valueOf((int) value);
         }
+
         return String.format("%.2f", value);
     }
 
     private String safeText(String value, String fallback) {
-        return value == null || value.isBlank() ? fallback : value;
+        if (value == null || value.isBlank()) {
+            return fallback;
+        }
+
+        return value;
     }
 
     @FXML
