@@ -21,6 +21,7 @@
         <Button text="20th Century" styleClass="sidebar-link" onAction="#go20thCent"/>
         <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
+        <Button text="Go Back" styleClass="sidebar-link" onAction="#goToContents"/>
     </VBox>
 
     <TabPane fx:id="standaloneTabPane" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"

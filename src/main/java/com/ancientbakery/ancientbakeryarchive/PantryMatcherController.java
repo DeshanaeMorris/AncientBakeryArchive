@@ -180,7 +180,7 @@ public class PantryMatcherController extends BaseNavigator {
     }
 
     @FXML
-    private void goToContents(ActionEvent event) {
+    public void goToContents(ActionEvent event) {
         goTo(event, "contents-view.fxml");
     }
 

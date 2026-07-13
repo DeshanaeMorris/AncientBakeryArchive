@@ -1,5 +1,6 @@
 package com.ancientbakery.ancientbakeryarchive;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,20 +17,25 @@ public class BaseNavigator {
 
     public static void setResponsiveScene(Stage stage, Parent root) {
         Scene currentScene = stage.getScene();
-        double width = currentScene != null && currentScene.getWidth() > 0
-                ? currentScene.getWidth()
-                : DEFAULT_WIDTH;
-        double height = currentScene != null && currentScene.getHeight() > 0
-                ? currentScene.getHeight()
-                : DEFAULT_HEIGHT;
-
         boolean wasMaximized = stage.isMaximized();
         boolean wasFullScreen = stage.isFullScreen();
 
-        stage.setScene(new Scene(root, width, height));
+        if (currentScene == null) {
+            stage.setScene(new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT));
+            stage.show();
+        } else {
+            currentScene.setRoot(root);
+        }
+
         stage.setMaximized(wasMaximized);
-        stage.setFullScreen(wasFullScreen);
-        stage.show();
+
+        if (wasFullScreen) {
+            Platform.runLater(() -> {
+                if (!stage.isFullScreen()) {
+                    stage.setFullScreen(true);
+                }
+            });
+        }
     }
 
     protected void goTo(ActionEvent event, String fxmlFile) {
@@ -73,10 +79,12 @@ public class BaseNavigator {
         goTo(event, "bakenow-view.fxml");
     }
 
-    public void goAnalytics(ActionEvent event){goTo(event, "analytics-hub-view.fxml");
-
+    public void goAnalytics(ActionEvent event) {
+        goTo(event, "analytics-hub-standalone-view.fxml");
     }
 
+    @FXML
+    public void goToContents(ActionEvent event) {
+        goTo(event, "contents-view.fxml");
     }
-
-
+}
