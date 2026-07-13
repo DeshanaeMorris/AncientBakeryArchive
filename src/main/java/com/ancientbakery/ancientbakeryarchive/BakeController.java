@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -343,22 +344,104 @@ public class BakeController extends BaseNavigator {
     }
 
     private String formatModernizedInstructions(String instructions, boolean useImperial) {
-        return convertTemperaturesInText(safeText(instructions, "Not available"), useImperial);
+        String instructionText = safeText(instructions, "Not available");
+        String convertedInstructions = containsBothTemperatureUnits(instructionText)
+                ? instructionText
+                : convertTemperaturesInText(instructionText, useImperial);
+
+        if (!hasExplicitTemperature(convertedInstructions)) {
+            String thermalNote = inferModernTemperature(useImperial);
+
+            if (!thermalNote.equals("Not listed")) {
+                convertedInstructions += "\n\nThermal conversion note: " + thermalNote;
+            }
+        }
+
+        return convertedInstructions;
     }
 
     private String formatModernTemperature(String originalTemperature, boolean useImperial) {
         String temperatureText = safeText(originalTemperature, "Not listed");
-        return convertTemperaturesInText(temperatureText, useImperial);
+
+        if (containsBothTemperatureUnits(temperatureText)) {
+            return temperatureText;
+        }
+
+        if (hasExplicitTemperature(temperatureText)) {
+            return convertTemperaturesInText(temperatureText, useImperial);
+        }
+
+        return inferModernTemperature(useImperial);
+    }
+
+    private String inferModernTemperature(boolean useImperial) {
+        String original = safeText(selectedRecipe == null ? null : selectedRecipe.getTemperatureDescription(), "");
+        String modernized = safeText(selectedRecipe == null ? null : selectedRecipe.getModernizedText(), "");
+        String combined = (original + " " + modernized).toLowerCase(Locale.ROOT);
+
+        String modernizedTemperature = findFirstConvertedTemperature(modernized, useImperial);
+        if (modernizedTemperature != null) {
+            return "Interpreted as " + modernizedTemperature + " based on the modernized recipe instructions.";
+        }
+
+        if (containsAny(combined, "no baking", "refrigerate", "chill until set", "chill", "let cool")) {
+            return "No oven temperature needed — chill or let set as directed.";
+        }
+
+        if (containsAny(combined, "stovetop", "simmer", "boil", "boiled", "saucepan", "medium heat", "medium-low flame", "shallow frying pan")) {
+            return "No oven temperature needed — use stovetop heat as directed.";
+        }
+
+        if (containsAny(combined, "fry", "frying", "hot oil", "skillet")) {
+            return "No oven temperature needed — fry over medium to medium-high heat until done.";
+        }
+
+        if (containsAny(combined, "broil", "torch", "glaze")) {
+            return formatThermalEstimate(500, useImperial) + " broiler or direct high heat, briefly.";
+        }
+
+        if (containsAny(combined, "wood-fired", "wood fired", "hearth", "clay pot", "under a pot", "under a hot clay pot")) {
+            return formatThermalEstimate(375, useImperial) + " moderate-hot oven; use a covered Dutch oven or oven-safe pot if needed.";
+        }
+
+        if (containsAny(combined, "little heat", "gentle heat", "slowly", "slow oven")) {
+            return formatThermalEstimate(325, useImperial) + " low-to-moderate oven.";
+        }
+
+        if (containsAny(combined, "hot oven", "very hot", "strong heat")) {
+            return formatThermalEstimate(400, useImperial) + " hot oven.";
+        }
+
+        if (containsAny(combined, "bake", "oven")) {
+            return formatThermalEstimate(350, useImperial) + " moderate oven.";
+        }
+
+        return "Not listed";
+    }
+
+    private String findFirstConvertedTemperature(String text, boolean useImperial) {
+        Pattern pattern = Pattern.compile("(\\d+(?:\\.\\d+)?)\\s*°?\\s*([FC])\\b", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(safeText(text, ""));
+
+        if (!matcher.find()) {
+            return null;
+        }
+
+        double value = Double.parseDouble(matcher.group(1));
+        String unit = matcher.group(2).toUpperCase(Locale.ROOT);
+        double fahrenheit = unit.equals("F") ? value : (value * 9 / 5) + 32;
+
+        return formatThermalEstimate(fahrenheit, useImperial);
     }
 
     private String convertTemperaturesInText(String text, boolean useImperial) {
-        Pattern pattern = Pattern.compile("(\\d+(?:\\.\\d+)?)\\s*°?([FC])\\b", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("(\\d+(?:\\.\\d+)?)\\s*°?\\s*([FC])\\b", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(text);
         StringBuffer result = new StringBuffer();
 
         while (matcher.find()) {
             double value = Double.parseDouble(matcher.group(1));
-            String unit = matcher.group(2).toUpperCase();
+            String unit = matcher.group(2).toUpperCase(Locale.ROOT);
 
             double fahrenheit = unit.equals("F") ? value : (value * 9 / 5) + 32;
             double celsius = unit.equals("C") ? value : (value - 32) * 5 / 9;
@@ -372,6 +455,37 @@ public class BakeController extends BaseNavigator {
 
         matcher.appendTail(result);
         return result.toString();
+    }
+
+    private boolean hasExplicitTemperature(String text) {
+        Pattern pattern = Pattern.compile("\\d+(?:\\.\\d+)?\\s*°?\\s*[FC]\\b", Pattern.CASE_INSENSITIVE);
+        return pattern.matcher(safeText(text, "")).find();
+    }
+
+    private boolean containsBothTemperatureUnits(String text) {
+        String safe = safeText(text, "");
+        Pattern celsiusPattern = Pattern.compile("\\d+(?:\\.\\d+)?\\s*°?\\s*C\\b", Pattern.CASE_INSENSITIVE);
+        Pattern fahrenheitPattern = Pattern.compile("\\d+(?:\\.\\d+)?\\s*°?\\s*F\\b", Pattern.CASE_INSENSITIVE);
+        return celsiusPattern.matcher(safe).find() && fahrenheitPattern.matcher(safe).find();
+    }
+
+    private String formatThermalEstimate(double fahrenheit, boolean useImperial) {
+        double celsius = (fahrenheit - 32) * 5 / 9;
+
+        if (useImperial) {
+            return format(fahrenheit) + "°F (" + format(celsius) + "°C)";
+        }
+
+        return format(celsius) + "°C (" + format(fahrenheit) + "°F)";
+    }
+
+    private boolean containsAny(String text, String... keywords) {
+        for (String keyword : keywords) {
+            if (text.contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private double parsePositiveNumber(String input) {
@@ -396,6 +510,10 @@ public class BakeController extends BaseNavigator {
         return String.format("%.2f", value);
     }
 
+    private String safeText(String value) {
+        return value == null ? "" : value;
+    }
+
     private String safeText(String value, String fallback) {
         if (value == null || value.isBlank()) {
             return fallback;
@@ -405,7 +523,7 @@ public class BakeController extends BaseNavigator {
     }
 
     @FXML
-    private void goToContents(ActionEvent event) {
+    public void goToContents(ActionEvent event) {
         goTo(event, "contents-view.fxml");
     }
 }
