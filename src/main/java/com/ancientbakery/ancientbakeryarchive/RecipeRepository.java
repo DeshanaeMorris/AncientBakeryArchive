@@ -75,6 +75,26 @@ public class RecipeRepository {
         return recipes;
     }
 
+    public List<Recipe> findAllRecipes() {
+        List<Recipe> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM Recipes ORDER BY id";
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet result = statement.executeQuery()) {
+
+            while (result.next()) {
+                Recipe recipe = mapRecipe(result);
+                recipes.add(recipe);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return recipes;
+    }
+
     public List<RecipeIngredient> findIngredientsByRecipeId(int recipeId) {
         List<RecipeIngredient> ingredients = new ArrayList<>();
         String sql = """

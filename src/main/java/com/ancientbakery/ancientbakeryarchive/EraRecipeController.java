@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public abstract class EraRecipeController extends BaseNavigator {
+
     @FXML
     private VBox eraTitleBox;
 
@@ -50,12 +51,15 @@ public abstract class EraRecipeController extends BaseNavigator {
     private Label pictureEraLabel;
 
     private static List<Glossary> glossaryTerms;
-    private final RecipeRepository recipeRepository = new RecipeRepository();
+
+    private final RecipeRepository recipeRepository =
+            new RecipeRepository();
+
     private VBox selectedCard;
 
     protected abstract int getEraId();
 
-    public static int defaultTab = 0; // 0=RECIPES, 1=PICTURES, 2=HISTORY
+    public static int defaultTab = 0;
 
     @FXML
     public void initialize() {
@@ -64,6 +68,7 @@ public abstract class EraRecipeController extends BaseNavigator {
 
     private void loadRecipeTab() {
         Era era = recipeRepository.findEraById(getEraId());
+
         loadEraTitle(era);
         loadRecipeCards();
         loadEraHistory();
@@ -74,10 +79,16 @@ public abstract class EraRecipeController extends BaseNavigator {
             return;
         }
 
-        String historyText = recipeRepository.getHistoryByEraId(getEraId());
+        String historyText =
+                recipeRepository.getHistoryByEraId(getEraId());
 
         historyTextArea.setWrapText(true);
-        historyTextArea.setText(safeText(historyText, "No historical context available for this era."));
+        historyTextArea.setText(
+                safeText(
+                        historyText,
+                        "No historical context available for this era."
+                )
+        );
     }
 
     private void loadEraTitle(Era era) {
@@ -87,8 +98,27 @@ public abstract class EraRecipeController extends BaseNavigator {
 
         eraTitleBox.getChildren().clear();
 
-        String eraName = era == null ? "Historical Era" : safeText(era.getName(), "Historical Era");
-        String timePeriod = era == null ? "" : safeText(era.getTimePeriod(), "");
+        String eraName;
+
+        if (era == null) {
+            eraName = "Historical Era";
+        } else {
+            eraName = safeText(
+                    era.getName(),
+                    "Historical Era"
+            );
+        }
+
+        String timePeriod;
+
+        if (era == null) {
+            timePeriod = "";
+        } else {
+            timePeriod = safeText(
+                    era.getTimePeriod(),
+                    ""
+            );
+        }
 
         AnalyticsHubController.sourceEra = eraName;
 
@@ -104,7 +134,10 @@ public abstract class EraRecipeController extends BaseNavigator {
         dates.setVisible(!timePeriod.isBlank());
         dates.setManaged(!timePeriod.isBlank());
 
-        eraTitleBox.getChildren().addAll(title, dates);
+        eraTitleBox.getChildren().addAll(
+                title,
+                dates
+        );
     }
 
     private void loadRecipeCards() {
@@ -113,19 +146,29 @@ public abstract class EraRecipeController extends BaseNavigator {
         }
 
         recipeCardsBox.getChildren().clear();
-        List<Recipe> recipes = recipeRepository.findRecipesByEra(getEraId());
+
+        List<Recipe> recipes =
+                recipeRepository.findRecipesByEra(getEraId());
 
         if (recipes.isEmpty()) {
-            Label emptyMessage = new Label("No recipes have been added for this era yet.");
+            Label emptyMessage =
+                    new Label(
+                            "No recipes have been added for this era yet."
+                    );
+
             emptyMessage.getStyleClass().add("recipe-card");
             emptyMessage.setPadding(new Insets(16));
             emptyMessage.setWrapText(true);
+
             recipeCardsBox.getChildren().add(emptyMessage);
             return;
         }
 
         VBox firstCard = null;
         Recipe firstRecipe = null;
+
+        VBox requestedCard = null;
+        Recipe requestedRecipe = null;
 
         for (Recipe recipe : recipes) {
             VBox card = createRecipeCard(recipe);
@@ -135,35 +178,76 @@ public abstract class EraRecipeController extends BaseNavigator {
                 firstRecipe = recipe;
             }
 
+            if (AppState.wasOpenedFromBakeNowPictures()
+                    && AppState.getSelectedRecipeId()
+                    == recipe.getId()) {
+
+                requestedCard = card;
+                requestedRecipe = recipe;
+            }
+
             recipeCardsBox.getChildren().add(card);
         }
 
-        if (firstCard != null && firstRecipe != null) {
-            selectRecipe(firstRecipe, firstCard);
+        if (requestedCard != null
+                && requestedRecipe != null) {
+
+            selectRecipe(
+                    requestedRecipe,
+                    requestedCard
+            );
+
+            AppState.clearBakeNowPicturesNavigation();
+
+        } else if (firstCard != null
+                && firstRecipe != null) {
+
+            selectRecipe(
+                    firstRecipe,
+                    firstCard
+            );
         }
     }
 
     private VBox createRecipeCard(Recipe recipe) {
         VBox card = new VBox(8);
+
         card.setPadding(new Insets(18));
         card.getStyleClass().add("recipe-card");
         card.setPrefWidth(620);
         card.setMaxWidth(760);
 
-        Label title = new Label(safeText(recipe.getName(), "Untitled Recipe"));
+        Label title = new Label(
+                safeText(
+                        recipe.getName(),
+                        "Untitled Recipe"
+                )
+        );
+
         title.getStyleClass().add("recipe-card-title");
         title.setWrapText(true);
         title.setMaxWidth(720);
 
-        Label historicalHeader = new Label("Original Text:");
+        Label historicalHeader =
+                new Label("Original Text:");
+
         historicalHeader.getStyleClass().add("recipe-meta");
 
-        TextFlow historicalText = buildOriginalTextFlow(recipe.getOriginalText());
+        TextFlow historicalText =
+                buildOriginalTextFlow(
+                        recipe.getOriginalText()
+                );
 
-        Label ingredientsHeader = new Label("Ingredients:");
+        Label ingredientsHeader =
+                new Label("Ingredients:");
+
         ingredientsHeader.getStyleClass().add("recipe-meta");
 
-        Label ingredients = new Label(formatIngredients(recipe.getId()));
+        Label ingredients =
+                new Label(
+                        formatIngredients(recipe.getId())
+                );
+
         ingredients.getStyleClass().add("recipe-body");
         ingredients.setWrapText(true);
         ingredients.setMaxWidth(720);
@@ -171,24 +255,43 @@ public abstract class EraRecipeController extends BaseNavigator {
         card.setOnMouseClicked(event -> {
             selectRecipe(recipe, card);
 
-            if (eraTabPane != null && picturesTab != null) {
-                eraTabPane.getSelectionModel().select(picturesTab);
+            if (eraTabPane != null
+                    && picturesTab != null) {
+
+                eraTabPane
+                        .getSelectionModel()
+                        .select(picturesTab);
             }
         });
 
-        card.getChildren().addAll(title, historicalHeader, historicalText, ingredientsHeader, ingredients);
+        card.getChildren().addAll(
+                title,
+                historicalHeader,
+                historicalText,
+                ingredientsHeader,
+                ingredients
+        );
+
         return card;
     }
 
-    private void selectRecipe(Recipe recipe, VBox card) {
+    private void selectRecipe(
+            Recipe recipe,
+            VBox card
+    ) {
         if (selectedCard != null) {
-            selectedCard.getStyleClass().remove("recipe-card-selected");
+            selectedCard
+                    .getStyleClass()
+                    .remove("recipe-card-selected");
         }
 
         selectedCard = card;
 
-        if (!card.getStyleClass().contains("recipe-card-selected")) {
-            card.getStyleClass().add("recipe-card-selected");
+        if (!card.getStyleClass()
+                .contains("recipe-card-selected")) {
+
+            card.getStyleClass()
+                    .add("recipe-card-selected");
         }
 
         AppState.selectRecipe(recipe.getId());
@@ -201,78 +304,165 @@ public abstract class EraRecipeController extends BaseNavigator {
         }
 
         if (pictureRecipeTitle != null) {
-            pictureRecipeTitle.setText(recipe.getName());
+            pictureRecipeTitle.setText(
+                    recipe.getName()
+            );
         }
 
-        Era era = recipeRepository.findEraById(getEraId());
+        Era era =
+                recipeRepository.findEraById(
+                        getEraId()
+                );
 
-        if (era != null && pictureEraLabel != null) {
-            pictureEraLabel.setText(era.getTimePeriod());
+        if (era != null
+                && pictureEraLabel != null) {
+
+            pictureEraLabel.setText(
+                    era.getTimePeriod()
+            );
         }
 
-        String imageName = recipe.getImageUrl();
+        String imageName =
+                recipe.getImageUrl();
 
-        if (imageName == null || imageName.isBlank()) {
-            System.out.println("No image listed for this recipe.");
+        if (imageName == null
+                || imageName.isBlank()) {
+
+            recipeImageView.setImage(null);
+            System.out.println(
+                    "No image listed for this recipe."
+            );
             return;
         }
 
-        String imagePath = "/com/ancientbakery/ancientbakeryarchive/images/" + imageName;
-        var imageStream = getClass().getResourceAsStream(imagePath);
+        String imagePath =
+                "/com/ancientbakery/ancientbakeryarchive/images/"
+                        + imageName;
+
+        var imageStream =
+                getClass().getResourceAsStream(
+                        imagePath
+                );
 
         if (imageStream == null) {
-            System.out.println("Could not find image: " + imagePath);
+            recipeImageView.setImage(null);
+            System.out.println(
+                    "Could not find image: "
+                            + imagePath
+            );
             return;
         }
 
-        Image image = new Image(imageStream);
+        Image image =
+                new Image(imageStream);
+
         recipeImageView.setImage(image);
     }
 
-    private TextFlow buildOriginalTextFlow(String text) {
+    private TextFlow buildOriginalTextFlow(
+            String text
+    ) {
         TextFlow flow = new TextFlow();
+
         flow.getStyleClass().add("recipe-body");
         flow.setMaxWidth(720);
 
-        List<Glossary> terms = getGlossaryTerms();
+        List<Glossary> terms =
+                getGlossaryTerms();
 
-        if (text == null || text.isBlank() || terms.isEmpty()) {
-            flow.getChildren().add(new Text(safeText(text, "Not available")));
+        if (text == null
+                || text.isBlank()
+                || terms.isEmpty()) {
+
+            flow.getChildren().add(
+                    new Text(
+                            safeText(
+                                    text,
+                                    "Not available"
+                            )
+                    )
+            );
+
             return flow;
         }
 
-        List<Glossary> sorted = new ArrayList<>(terms);
-        sorted.sort((a, b) -> b.getTerm().length() - a.getTerm().length());
+        List<Glossary> sorted =
+                new ArrayList<>(terms);
 
-        String pattern = sorted.stream()
-                .map(g -> "\\b" + Pattern.quote(g.getTerm()) + "\\b")
-                .collect(Collectors.joining("|"));
+        sorted.sort(
+                (a, b) ->
+                        b.getTerm().length()
+                                - a.getTerm().length()
+        );
 
-        Matcher matcher = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE).matcher(text);
+        String pattern =
+                sorted.stream()
+                        .map(glossary ->
+                                "\\b"
+                                        + Pattern.quote(
+                                        glossary.getTerm()
+                                )
+                                        + "\\b"
+                        )
+                        .collect(
+                                Collectors.joining("|")
+                        );
+
+        Matcher matcher =
+                Pattern.compile(
+                        pattern,
+                        Pattern.CASE_INSENSITIVE
+                ).matcher(text);
+
         int lastEnd = 0;
 
         while (matcher.find()) {
             if (matcher.start() > lastEnd) {
-                flow.getChildren().add(new Text(text.substring(lastEnd, matcher.start())));
+                flow.getChildren().add(
+                        new Text(
+                                text.substring(
+                                        lastEnd,
+                                        matcher.start()
+                                )
+                        )
+                );
             }
 
-            String matched = matcher.group();
-            Glossary glossary = sorted.stream()
-                    .filter(t -> t.getTerm().equalsIgnoreCase(matched))
-                    .findFirst()
-                    .orElse(null);
+            String matched =
+                    matcher.group();
+
+            Glossary glossary =
+                    sorted.stream()
+                            .filter(term ->
+                                    term.getTerm()
+                                            .equalsIgnoreCase(
+                                                    matched
+                                            )
+                            )
+                            .findFirst()
+                            .orElse(null);
 
             Text run = new Text(matched);
 
             if (glossary != null) {
                 run.getStyleClass().add("old-term");
 
-                Tooltip tooltip = new Tooltip(glossary.getDefinition()
-                        + "\nModern: "
-                        + glossary.getModernSubstitute());
+                Tooltip tooltip =
+                        new Tooltip(
+                                glossary.getDefinition()
+                                        + "\nModern: "
+                                        + glossary
+                                        .getModernSubstitute()
+                        );
 
-                tooltip.setShowDelay(Duration.millis(100));
-                Tooltip.install(run, tooltip);
+                tooltip.setShowDelay(
+                        Duration.millis(100)
+                );
+
+                Tooltip.install(
+                        run,
+                        tooltip
+                );
             }
 
             flow.getChildren().add(run);
@@ -280,7 +470,11 @@ public abstract class EraRecipeController extends BaseNavigator {
         }
 
         if (lastEnd < text.length()) {
-            flow.getChildren().add(new Text(text.substring(lastEnd)));
+            flow.getChildren().add(
+                    new Text(
+                            text.substring(lastEnd)
+                    )
+            );
         }
 
         return flow;
@@ -288,38 +482,70 @@ public abstract class EraRecipeController extends BaseNavigator {
 
     private List<Glossary> getGlossaryTerms() {
         if (glossaryTerms == null) {
-            glossaryTerms = recipeRepository.findAllGlossaryTerms();
+            glossaryTerms =
+                    recipeRepository
+                            .findAllGlossaryTerms();
         }
 
         return glossaryTerms;
     }
 
-    private String formatIngredients(int recipeId) {
-        List<RecipeIngredient> ingredients = recipeRepository.findIngredientsByRecipeId(recipeId);
+    private String formatIngredients(
+            int recipeId
+    ) {
+        List<RecipeIngredient> ingredients =
+                recipeRepository
+                        .findIngredientsByRecipeId(
+                                recipeId
+                        );
 
         if (ingredients.isEmpty()) {
             return "No ingredients listed.";
         }
 
         return ingredients.stream()
-                .map(ingredient -> "• " + safeText(ingredient.getIngredientName(), "Ingredient")
-                        + " — "
-                        + format(ingredient.getQuantity())
-                        + " "
-                        + safeText(ingredient.getUnit(), ""))
-                .collect(Collectors.joining("\n"));
+                .map(ingredient ->
+                        "• "
+                                + safeText(
+                                ingredient
+                                        .getIngredientName(),
+                                "Ingredient"
+                        )
+                                + " — "
+                                + format(
+                                ingredient.getQuantity()
+                        )
+                                + " "
+                                + safeText(
+                                ingredient.getUnit(),
+                                ""
+                        )
+                )
+                .collect(
+                        Collectors.joining("\n")
+                );
     }
 
     private String format(double value) {
         if (value == Math.rint(value)) {
-            return String.valueOf((int) value);
+            return String.valueOf(
+                    (int) value
+            );
         }
 
-        return String.format("%.2f", value);
+        return String.format(
+                "%.2f",
+                value
+        );
     }
 
-    private String safeText(String value, String fallback) {
-        if (value == null || value.isBlank()) {
+    private String safeText(
+            String value,
+            String fallback
+    ) {
+        if (value == null
+                || value.isBlank()) {
+
             return fallback;
         }
 
