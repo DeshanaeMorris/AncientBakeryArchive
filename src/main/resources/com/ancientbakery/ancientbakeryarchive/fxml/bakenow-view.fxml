@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.ancientbakery.ancientbakeryarchive.BakeController"
             stylesheets="@../styles.css"
             styleClass="era-screen"
-            prefHeight="600.0" prefWidth="800.0"
-            minHeight="500.0" minWidth="700.0">
+            prefHeight="600.0"
+            prefWidth="800.0"
+            minHeight="500.0"
+            minWidth="700.0">
 
-    <!-- Left Sidebar: Era Navigation -->
-    <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="20.0"
-          prefWidth="150" spacing="10" alignment="CENTER" styleClass="era-sidebar">
+    <!-- Left Sidebar -->
+    <VBox AnchorPane.leftAnchor="20.0"
+          AnchorPane.topAnchor="60.0"
+          AnchorPane.bottomAnchor="20.0"
+          prefWidth="150"
+          spacing="10"
+          alignment="CENTER"
+          styleClass="era-sidebar">
 
         <Button text="Ancient" styleClass="sidebar-link" onAction="#goAncient"/>
         <Button text="Medieval" styleClass="sidebar-link" onAction="#goMedieval"/>
@@ -23,68 +31,187 @@
         <Button text="20th Century" styleClass="sidebar-link" onAction="#go20thCent"/>
         <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
 
-        <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
-        <Button text="Go Back" styleClass="sidebar-link" onAction="#goToContents"/>
+        <Button text="BAKE NOW"
+                styleClass="bake-now"
+                prefHeight="50"
+                prefWidth="120"
+                onAction="#goBakeNow"/>
+
+        <Button text="Go Back"
+                styleClass="sidebar-link"
+                onAction="#goToContents"/>
 
     </VBox>
 
-    <!-- Tabs over split content: recipe parchment + conversions panel -->
-    <TabPane AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
-             AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
-             tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
+    <TabPane AnchorPane.leftAnchor="185.0"
+             AnchorPane.topAnchor="20.0"
+             AnchorPane.rightAnchor="20.0"
+             AnchorPane.bottomAnchor="20.0"
+             tabClosingPolicy="UNAVAILABLE"
+             styleClass="era-tabs">
 
+        <!-- RECIPES -->
         <Tab text="RECIPES">
-            <VBox styleClass="conversions-panel" spacing="8" alignment="TOP_LEFT">
+
+            <VBox styleClass="conversions-panel"
+                  spacing="8"
+                  alignment="TOP_LEFT">
+
                 <padding>
                     <Insets top="18" right="14" bottom="14" left="14"/>
                 </padding>
 
-                <Label text="Bake Now - Selected Recipe Conversion" styleClass="recipe-title-small"/>
-                <Label fx:id="selectedRecipeLabel" styleClass="recipe-subtitle" wrapText="true"/>
-                <Label fx:id="statusLabel" styleClass="recipe-instruction" wrapText="true"/>
+                <Label text="Bake Now - Selected Recipe Conversion"
+                       styleClass="recipe-title-small"/>
 
-                <FlowPane hgap="8" vgap="8" alignment="CENTER_LEFT">
+                <Label fx:id="selectedRecipeLabel"
+                       styleClass="recipe-subtitle"
+                       wrapText="true"/>
+
+                <Label fx:id="statusLabel"
+                       styleClass="recipe-instruction"
+                       wrapText="true"/>
+
+                <FlowPane hgap="8"
+                          vgap="8"
+                          alignment="CENTER_LEFT">
+
                     <Label text="Portion multiplier:"/>
-                    <TextField fx:id="multiplierField" prefWidth="90"/>
+
+                    <TextField fx:id="multiplierField"
+                               prefWidth="90"/>
+
                     <Label text="Units:"/>
-                    <ComboBox fx:id="unitSystemBox" prefWidth="150"/>
-                    <Button text="Update Modern Version" onAction="#updateModernRecipe"/>
+
+                    <ComboBox fx:id="unitSystemBox"
+                              prefWidth="150"/>
+
+                    <Button text="Update Modern Version"
+                            onAction="#updateModernRecipe"/>
+
                 </FlowPane>
 
-                <HBox spacing="10" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                <HBox spacing="10"
+                      alignment="TOP_CENTER"
+                      VBox.vgrow="ALWAYS">
+
                     <VBox spacing="4" HBox.hgrow="ALWAYS">
-                        <Label text="Original Recipe" styleClass="recipe-subtitle"/>
-                        <TextArea fx:id="historicalRecipeText" prefWidth="270" prefHeight="310"
-                                  maxWidth="Infinity" maxHeight="Infinity" VBox.vgrow="ALWAYS"
-                                  wrapText="true" editable="false" styleClass="recipe-output-area"/>
+
+                        <Label text="Original Recipe"
+                               styleClass="recipe-subtitle"/>
+
+                        <TextArea fx:id="historicalRecipeText"
+                                  prefWidth="270"
+                                  prefHeight="310"
+                                  maxWidth="Infinity"
+                                  maxHeight="Infinity"
+                                  VBox.vgrow="ALWAYS"
+                                  wrapText="true"
+                                  editable="false"
+                                  styleClass="recipe-output-area"/>
+
                     </VBox>
 
                     <VBox spacing="4" HBox.hgrow="ALWAYS">
-                        <Label text="Modernized Recipe Output" styleClass="recipe-subtitle"/>
-                        <TextArea fx:id="modernRecipeText" prefWidth="270" prefHeight="310"
-                                  maxWidth="Infinity" maxHeight="Infinity" VBox.vgrow="ALWAYS"
-                                  wrapText="true" editable="false" styleClass="recipe-output-area"/>
+
+                        <Label text="Modernized Recipe Output"
+                               styleClass="recipe-subtitle"/>
+
+                        <TextArea fx:id="modernRecipeText"
+                                  prefWidth="270"
+                                  prefHeight="310"
+                                  maxWidth="Infinity"
+                                  maxHeight="Infinity"
+                                  VBox.vgrow="ALWAYS"
+                                  wrapText="true"
+                                  editable="false"
+                                  styleClass="recipe-output-area"/>
+
                     </VBox>
+
                 </HBox>
+
             </VBox>
+
         </Tab>
 
-        <Tab text="PICTURES">
-            <StackPane styleClass="parchment-ancient">
-                <Label text="Pictures coming soon" styleClass="recipe-title"/>
+        <!-- PICTURES -->
+        <Tab fx:id="featuredPicturesTab"
+             text="PICTURES">
+
+            <StackPane styleClass="ancient-clean-page">
+
+                <VBox alignment="CENTER"
+                      spacing="18"
+                      styleClass="picture-card"
+                      onMouseClicked="#openFeaturedRecipe"
+                      style="-fx-cursor: hand;">
+
+                    <VBox alignment="CENTER"
+                          spacing="2">
+
+                        <Label text="Featured Recipe"
+                               styleClass="picture-title"/>
+
+                        <Label fx:id="featuredRecipeLabel"
+                               text="Select a featured recipe"
+                               styleClass="picture-era"
+                               wrapText="true"/>
+
+                    </VBox>
+
+                    <ImageView fx:id="featuredRecipeImage"
+                               fitWidth="600"
+                               fitHeight="360"
+                               preserveRatio="true"
+                               smooth="true"
+                               styleClass="picture-image"/>
+
+                </VBox>
+
             </StackPane>
+
         </Tab>
 
+        <!-- HISTORY -->
         <Tab text="HISTORY">
-            <StackPane styleClass="parchment-ancient">
-                <Label text="History coming soon" styleClass="recipe-title"/>
+
+            <StackPane styleClass="ancient-clean-page">
+
+                <VBox alignment="TOP_CENTER"
+                      spacing="2"
+                      maxWidth="780"
+                      styleClass="solid-readable-panel">
+
+                    <padding>
+                        <Insets top="70" right="30" bottom="30" left="30"/>
+                    </padding>
+
+                    <ImageView fx:id="historyPlaceholderIcon"
+                               fitWidth="260"
+                               preserveRatio="true"
+                               smooth="true"/>
+
+                    <Label text="You're on the wrong side of history — select a recipe from the Eras menu to learn its story."
+                           wrapText="true"
+                           textAlignment="CENTER"
+                           alignment="CENTER"
+                           maxWidth="700"
+                           styleClass="history-placeholder-message"/>
+
+                </VBox>
             </StackPane>
         </Tab>
 
+        <!-- ANALYTICS -->
         <Tab text="ANALYTICS HUB">
+
             <StackPane styleClass="parchment-industrial">
                 <fx:include source="analytics-hub-view.fxml"/>
             </StackPane>
+
         </Tab>
+
     </TabPane>
+
 </AnchorPane>
