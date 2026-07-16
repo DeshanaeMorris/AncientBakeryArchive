@@ -108,6 +108,11 @@ public class AncientController extends EraRecipeController {
             searchResultsList.setVisible(hasResults);
             searchResultsList.setManaged(hasResults);
 
+            int itemCount = searchResultsList.getItems().size();
+            double rowHeight = 34;
+            double calculatedHeight = Math.min(itemCount * rowHeight + 2, 220);
+            searchResultsList.setPrefHeight(calculatedHeight);
+
             if (!hasResults) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("No Matches");
