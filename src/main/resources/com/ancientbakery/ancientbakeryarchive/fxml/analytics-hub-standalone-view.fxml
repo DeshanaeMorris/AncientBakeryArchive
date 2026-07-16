@@ -65,12 +65,16 @@
                     <Insets top="18" right="14" bottom="14" left="14"/>
                 </padding>
 
-                <VBox styleClass="hero-banner" alignment="BOTTOM_LEFT" prefHeight="180" spacing="8">
-                    <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
-                    </padding>
-                    <Label text="Analytics Hub" styleClass="hero-title"/>
-                </VBox>
+                <StackPane>
+                    <Pane styleClass="hero-image" maxWidth="Infinity" prefHeight="180"/>
+
+                    <VBox styleClass="hero-banner" alignment="BOTTOM_LEFT" prefHeight="180" spacing="8">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <Label text="Analytics Hub" styleClass="hero-title"/>
+                    </VBox>
+                </StackPane>
 
                 <GridPane hgap="16">
                     <columnConstraints>
@@ -104,9 +108,18 @@
 
                 <Label text="Choose a report" styleClass="analytics-section-title" alignment="CENTER" maxWidth="Infinity"/>
 
-                <GridPane hgap="22" vgap="22" alignment="CENTER">
+                <GridPane hgap="22" vgap="22" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                        <ColumnConstraints percentWidth="50" hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="ALWAYS"/>
+                        <RowConstraints vgrow="ALWAYS"/>
+                    </rowConstraints>
+
                     <Button onAction="#goCookingFats" styleClass="analytics-report-card"
-                            prefWidth="220" prefHeight="160" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            maxWidth="Infinity" maxHeight="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <graphic>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label text="📊" styleClass="analytics-report-icon"/>
@@ -117,7 +130,7 @@
                     </Button>
 
                     <Button onAction="#goSweeteners" styleClass="analytics-report-card"
-                            prefWidth="220" prefHeight="160" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            maxWidth="Infinity" maxHeight="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0">
                         <graphic>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label text="📈" styleClass="analytics-report-icon"/>
@@ -128,7 +141,7 @@
                     </Button>
 
                     <Button onAction="#goYeastTimeline" styleClass="analytics-report-card"
-                            prefWidth="220" prefHeight="160" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            maxWidth="Infinity" maxHeight="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <graphic>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label text="⏳" styleClass="analytics-report-icon"/>
@@ -139,7 +152,7 @@
                     </Button>
 
                     <Button onAction="#goEraBreakdown" styleClass="analytics-report-card"
-                            prefWidth="220" prefHeight="160" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            maxWidth="Infinity" maxHeight="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <graphic>
                             <VBox alignment="CENTER" spacing="10">
                                 <Label text="🥧" styleClass="analytics-report-icon"/>

@@ -467,7 +467,14 @@
 }
 
 .hero-banner {
-    -fx-background-color: #8a6a4d;
+    -fx-background-color: rgba(30, 18, 10, 0.45);
+    -fx-background-radius: 26;
+}
+.hero-image {
+    -fx-background-image: url('images/midnys.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
     -fx-background-radius: 26;
 }
 
