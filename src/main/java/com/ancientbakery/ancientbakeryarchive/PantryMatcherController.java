@@ -85,6 +85,7 @@ public class PantryMatcherController extends BaseNavigator {
                 JOIN Recipe_Ingredients ri ON ri.Recipes_ID = r.id
                 WHERE ri.Ingredients_ID IN (%s)
                 GROUP BY r.id
+                HAVING COUNT(DISTINCT ri.Ingredients_ID) = ?
                 ORDER BY matched_count DESC, r.name
                 """.formatted(placeholder);
 
@@ -94,6 +95,7 @@ public class PantryMatcherController extends BaseNavigator {
             for (int i = 0; i < selectedIngredientIds.size(); i++) {
                 statement.setInt(i + 1, selectedIngredientIds.get(i));
             }
+            statement.setInt(selectedIngredientIds.size() + 1, selectedIngredientIds.size());
 
             try (ResultSet result = statement.executeQuery()) {
                 int count = 0;
@@ -110,6 +112,7 @@ public class PantryMatcherController extends BaseNavigator {
 
                 if (count == 0){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.initOwner(recipeResultsPane.getScene().getWindow());
                     alert.setTitle("No Matches");
                     alert.setHeaderText(null);
                     alert.setContentText("None of the selected ingredients match a recipe in the archive. Try again.");

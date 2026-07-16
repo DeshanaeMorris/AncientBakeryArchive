@@ -34,75 +34,95 @@
 
 
         <Tab text="ANALYTICS HUB" closable="false">
-            <VBox styleClass="conversions-panel" spacing="20">
+            <VBox styleClass="analytics-page" spacing="20">
                 <padding>
                     <Insets top="18" right="14" bottom="14" left="14"/>
                 </padding>
 
-                <Label text="Analytics Hub - Archive Dashboard" styleClass="recipe-title-small"/>
+                <VBox styleClass="hero-banner" alignment="BOTTOM_LEFT" prefHeight="180" spacing="8">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label text="Analytics Hub" styleClass="hero-title"/>
+                </VBox>
 
-                <HBox spacing="20" alignment="CENTER_LEFT">
-                    <VBox styleClass="analytics-card" alignment="CENTER" spacing="5"
-                          prefWidth="180" prefHeight="80">
-                        <Label text="Total Recipes" style="-fx-font-size: 14; -fx-text-fill: #8a7560;"/>
-                        <Label fx:id="totalRecipesLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
+                <GridPane hgap="16">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25" minWidth="0"/>
+                        <ColumnConstraints percentWidth="25" minWidth="0"/>
+                        <ColumnConstraints percentWidth="25" minWidth="0"/>
+                        <ColumnConstraints percentWidth="25" minWidth="0"/>
+                    </columnConstraints>
+
+                    <VBox styleClass="analytics-kpi-card" alignment="CENTER" spacing="5"
+                          minWidth="0" prefHeight="90" GridPane.columnIndex="0">
+                        <Label text="Total Recipes" styleClass="analytics-kpi-label"/>
+                        <Label fx:id="totalRecipesLabel" text="0" styleClass="analytics-kpi-value"/>
                     </VBox>
-                    <VBox styleClass="analytics-card" alignment="CENTER" spacing="5"
-                          prefWidth="180" prefHeight="80">
-                        <Label text="Eras Covered" style="-fx-font-size: 14; -fx-text-fill: #8a7560;"/>
-                        <Label fx:id="totalErasLabel" text="0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
+                    <VBox styleClass="analytics-kpi-card" alignment="CENTER" spacing="5"
+                          minWidth="0" prefHeight="90" GridPane.columnIndex="1">
+                        <Label text="Eras Covered" styleClass="analytics-kpi-label"/>
+                        <Label fx:id="totalErasLabel" text="0" styleClass="analytics-kpi-value"/>
                     </VBox>
-                </HBox>
+                    <VBox styleClass="analytics-kpi-card" alignment="CENTER" spacing="5"
+                          minWidth="0" prefHeight="90" GridPane.columnIndex="2">
+                        <Label text="Most Complex Recipe" styleClass="analytics-kpi-label" wrapText="true"/>
+                        <Label fx:id="complexRecipeLabel" text="N/A" styleClass="analytics-kpi-value-small" wrapText="true"/>
+                    </VBox>
+                    <VBox styleClass="analytics-kpi-card" alignment="CENTER" spacing="5"
+                          minWidth="0" prefHeight="90" GridPane.columnIndex="3">
+                        <Label text="Top Archive Ingredient" styleClass="analytics-kpi-label" wrapText="true"/>
+                        <Label fx:id="ancientIngredientLabel" text="N/A" styleClass="analytics-kpi-value-small" wrapText="true"/>
+                    </VBox>
+                </GridPane>
 
-                <Separator />
+                <Label text="Choose a report" styleClass="analytics-section-title" alignment="CENTER" maxWidth="Infinity"/>
 
-                <Label text="Choose a report" styleClass="recipe-subtitle"/>
-
-                <HBox spacing="16" alignment="TOP_LEFT">
-                    <Button onAction="#goCookingFats" styleClass="analytics-card, analytics-card-button"
-                            prefWidth="160" prefHeight="120">
+                <GridPane hgap="22" vgap="22" alignment="CENTER">
+                    <Button onAction="#goCookingFats" styleClass="analytics-report-card"
+                            prefWidth="220" prefHeight="160" GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <graphic>
-                            <VBox alignment="CENTER" spacing="6">
-                                <Label text="📊" style="-fx-font-size: 22;"/>
-                                <Label text="Cooking Fats" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
-                                <Label text="Leaderboard" style="-fx-font-size: 12; -fx-text-fill: #8a7560;"/>
+                            <VBox alignment="CENTER" spacing="10">
+                                <Label text="📊" styleClass="analytics-report-icon"/>
+                                <Label text="Cooking Fats" styleClass="analytics-report-title"/>
+                                <Label text="Leaderboard" styleClass="analytics-report-subtitle"/>
                             </VBox>
                         </graphic>
                     </Button>
 
-                    <Button onAction="#goSweeteners" styleClass="analytics-card, analytics-card-button"
-                            prefWidth="160" prefHeight="120">
+                    <Button onAction="#goSweeteners" styleClass="analytics-report-card"
+                            prefWidth="220" prefHeight="160" GridPane.columnIndex="1" GridPane.rowIndex="0">
                         <graphic>
-                            <VBox alignment="CENTER" spacing="6">
-                                <Label text="📈" style="-fx-font-size: 22;"/>
-                                <Label text="Sweeteners" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
-                                <Label text="Line graph" style="-fx-font-size: 12; -fx-text-fill: #8a7560;"/>
+                            <VBox alignment="CENTER" spacing="10">
+                                <Label text="📈" styleClass="analytics-report-icon"/>
+                                <Label text="Sweeteners" styleClass="analytics-report-title"/>
+                                <Label text="Line graph" styleClass="analytics-report-subtitle"/>
                             </VBox>
                         </graphic>
                     </Button>
 
-                    <Button onAction="#goYeastTimeline" styleClass="analytics-card, analytics-card-button"
-                            prefWidth="160" prefHeight="120">
+                    <Button onAction="#goYeastTimeline" styleClass="analytics-report-card"
+                            prefWidth="220" prefHeight="160" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <graphic>
-                            <VBox alignment="CENTER" spacing="6">
-                                <Label text="⏳" style="-fx-font-size: 22;"/>
-                                <Label text="Yeast Timeline" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
-                                <Label text="Rising agents" style="-fx-font-size: 12; -fx-text-fill: #8a7560;"/>
+                            <VBox alignment="CENTER" spacing="10">
+                                <Label text="⏳" styleClass="analytics-report-icon"/>
+                                <Label text="Yeast Timeline" styleClass="analytics-report-title"/>
+                                <Label text="Rising agents" styleClass="analytics-report-subtitle"/>
                             </VBox>
                         </graphic>
                     </Button>
-                </HBox>
 
-                <Button onAction="#goEraBreakdown" styleClass="analytics-card, analytics-card-button"
-                        prefWidth="160" prefHeight="120">
-                    <graphic>
-                        <VBox alignment="CENTER" spacing="6">
-                            <Label text="🥧" style="-fx-font-size: 22;"/>
-                            <Label text="Era Breakdown" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #3b2314;"/>
-                            <Label text="Pie chart" style="-fx-font-size: 12; -fx-text-fill: #8a7560;"/>
-                        </VBox>
-                    </graphic>
-                </Button>
+                    <Button onAction="#goEraBreakdown" styleClass="analytics-report-card"
+                            prefWidth="220" prefHeight="160" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <graphic>
+                            <VBox alignment="CENTER" spacing="10">
+                                <Label text="🥧" styleClass="analytics-report-icon"/>
+                                <Label text="Era Breakdown" styleClass="analytics-report-title"/>
+                                <Label text="Pie chart" styleClass="analytics-report-subtitle"/>
+                            </VBox>
+                        </graphic>
+                    </Button>
+                </GridPane>
 
             </VBox>
         </Tab>
