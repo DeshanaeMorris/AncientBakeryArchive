@@ -17,9 +17,31 @@
 
 
     <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="58.0" AnchorPane.bottomAnchor="20.0"
-          prefWidth="150" spacing="10" alignment="CENTER" styleClass="era-sidebar">
+          prefWidth="150" spacing="10" alignment="TOP_CENTER" styleClass="era-sidebar">
 
+        <VBox spacing="5" alignment="CENTER">
+            <padding>
+                <Insets top="10" right="10" bottom="15" left="10"/>
+            </padding>
+            <StackPane prefWidth="130" maxWidth="140">
+                <TextField fx:id="searchField" promptText="Search..."
+                           onAction="#handleSearch" prefWidth="130"
+                           styleClass="search-field"/>
+                <Label text="🔍" styleClass="search-icon"
+                       StackPane.alignment="CENTER_LEFT"
+                       translateX="6"/>
+            </StackPane>
 
+            <ListView fx:id="searchResultsList"
+                      prefWidth="130"
+                      maxWidth="140"
+                      minHeight="100"
+                      prefHeight="120"
+                      maxHeight="150"
+                      managed="false"
+                      visible="false"
+                      styleClass="search-results"/>
+        </VBox>
         <Button text="Ancient" styleClass="sidebar-link" onAction="#goAncient"/>
         <Button text="Medieval" styleClass="sidebar-link" onAction="#goMedieval"/>
         <Button text="Renaissance" styleClass="sidebar-link" onAction="#goRenaissance"/>
@@ -27,14 +49,10 @@
         <Button text="20th Century" styleClass="sidebar-link" onAction="#go20thCent"/>
         <Button text="Modern" styleClass="sidebar-link" onAction="#goModern"/>
 
-
         <Button text="BAKE NOW" styleClass="bake-now" prefHeight="50" prefWidth="120" onAction="#goBakeNow"/>
         <Button text="Go Back" styleClass="sidebar-link" onAction="#goToContents"/>
 
-
     </VBox>
-
-
     <TabPane fx:id="eraTabPane"
              AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
