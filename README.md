@@ -17,7 +17,7 @@ An Ancient Bakery Archive that contains recipes from older time periods to moder
 **Modern**
 21st Century
 
-Each era screen has its own visual identity (color palette and font) while sharing a consistent overall layout.
+Each era screen has its own visual theme (color palette and font) while sharing a consistent overall layout.
 Features
 
 **Browsing & Search**
