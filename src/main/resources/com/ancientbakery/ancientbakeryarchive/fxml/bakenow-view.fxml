@@ -17,8 +17,8 @@
 
     <!-- Left Sidebar -->
     <VBox AnchorPane.leftAnchor="20.0"
-          AnchorPane.topAnchor="60.0"
-          AnchorPane.bottomAnchor="20.0"
+          AnchorPane.topAnchor="75.0"
+          AnchorPane.bottomAnchor="10.0"
           prefWidth="150"
           spacing="10"
           alignment="CENTER"
@@ -213,5 +213,32 @@
         </Tab>
 
     </TabPane>
+
+    <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0"
+          prefWidth="150" spacing="5" alignment="CENTER_LEFT"
+          styleClass="era-sidebar" pickOnBounds="false">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <StackPane prefWidth="130" maxWidth="130">
+            <TextField fx:id="searchField" promptText="Search..."
+                       onAction="#handleSearch" prefWidth="130"
+                       styleClass="search-field"/>
+            <Label text="🔍" styleClass="search-icon"
+                   StackPane.alignment="CENTER_LEFT"
+                   translateX="6"/>
+        </StackPane>
+
+        <ListView fx:id="searchResultsList"
+                  prefWidth="420"
+                  maxWidth="420"
+                  minWidth="420"
+                  prefHeight="180"
+                  maxHeight="220"
+                  managed="false"
+                  visible="false"
+                  styleClass="search-results"/>
+    </VBox>
 
 </AnchorPane>
