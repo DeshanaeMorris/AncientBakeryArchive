@@ -31,26 +31,6 @@
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <StackPane prefWidth="280" maxWidth="420">
-                <TextField fx:id="searchField" promptText="Search recipes..."
-                           onAction="#handleSearch" prefWidth="280"
-                           maxWidth="420"
-                           styleClass="search-field"/>
-                <Label text="🔍" styleClass="search-icon"
-                       StackPane.alignment="CENTER_LEFT"
-                       translateX="6"/>
-            </StackPane>
-
-            <ListView fx:id="searchResultsList"
-                      prefWidth="280"
-                      maxWidth="420"
-                      minHeight="160"
-                      prefHeight="180"
-                      maxHeight="220"
-                      managed="false"
-                      visible="false"
-                      styleClass="search-results"/>
-
             <Button fx:id="ancientButton" text="ANCIENT" styleClass="contents-link"
                     prefWidth="280" prefHeight="50" onAction="#goAncient"/>
 
