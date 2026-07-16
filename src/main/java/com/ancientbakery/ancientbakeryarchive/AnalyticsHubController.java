@@ -111,4 +111,6 @@ public class AnalyticsHubController extends BaseNavigator {
         goTo(event, fxml);
     }
 
+    public void handleSearch(ActionEvent actionEvent) {
+    }
 }
