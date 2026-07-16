@@ -14,7 +14,11 @@
 
     <!-- Left Sidebar: Ingredient Checklist -->
     <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="20.0"
-          prefWidth="150" spacing="10" alignment="TOP_CENTER" styleClass="era-sidebar">
+          prefWidth="190" spacing="10" alignment="TOP_CENTER" styleClass="era-sidebar">
+
+        <padding>
+            <Insets top="20" right="12" bottom="16" left="12"/>
+        </padding>
 
         <Label text="Your Pantry" styleClass="sidebar-title"/>
         <Label text="Check what you have:" styleClass="sidebar-subtitle" wrapText="true"/>
@@ -34,7 +38,7 @@
     </VBox>
 
     <!-- Main Content -->
-    <TabPane AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0"
+    <TabPane AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="20.0"
              AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
              tabClosingPolicy="UNAVAILABLE" styleClass="era-tabs">
 
