@@ -25,19 +25,30 @@ public class CookingFatsController extends BaseNavigator {
         leaderboardContainer.getChildren().clear();
 
         if (fatRankings != null) {
+            int displayRank =1;
+            int previousValue = -1;
+            int index = 0;
+
             for (Map.Entry<String, Integer> entry : fatRankings.entrySet()) {
                 String currentFatName = entry.getKey();
 
-                // 1. Vertical container for the item block
+                int currentValue = entry.getValue();
+                if (index > 0 && currentValue < previousValue) {
+                    displayRank = index + 1;
+                }
+                previousValue = currentValue;
+                index++;
+
+                // Vertical container for item
                 VBox fatItemContainer = new VBox(5);
                 fatItemContainer.setStyle("-fx-padding: 10; -fx-background-color: rgba(255,255,255,0.5); -fx-background-radius: 6;");
 
-                // 2. Main horizontal row (The clickable part)
+                // horizontal row (The clickable part)
                 HBox mainRow = new HBox(20);
                 mainRow.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
                 mainRow.setStyle("-fx-cursor: hand;"); // Makes the mouse cursor turn into a pointing hand on hover!
 
-                Label fatName = new Label(currentFatName);
+                Label fatName = new Label(displayRank + ". " + currentFatName);
                 fatName.setPrefWidth(120);
                 fatName.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #3b2314;");
 
@@ -47,12 +58,12 @@ public class CookingFatsController extends BaseNavigator {
                 mainRow.getChildren().addAll(fatName, countLabel);
                 fatItemContainer.getChildren().add(mainRow);
 
-                // 3. Create a hidden VBox container to hold the era labels
+                // VBox container to hold the era labels
                 VBox eraSubList = new VBox(5);
-                eraSubList.setVisible(false); // Hidden by default!
-                eraSubList.setManaged(false); // Takes up 0 screen space while hidden
+                eraSubList.setVisible(false);
+                eraSubList.setManaged(false);
 
-                // Fetch the era data from your repository
+                // Fetch the era data from repository
                 Map<String, Integer> eraBreakdown = recipeRepository.getEraBreakdownForFat(currentFatName);
                 if (eraBreakdown != null) {
                     for (Map.Entry<String, Integer> eraEntry : eraBreakdown.entrySet()) {
@@ -63,7 +74,7 @@ public class CookingFatsController extends BaseNavigator {
                 }
                 fatItemContainer.getChildren().add(eraSubList);
 
-                // 4. 🚀 THE CLICK INTERACTION: Toggle the visibility!
+
                 mainRow.setOnMouseClicked(event -> {
                     boolean isExpanded = eraSubList.isVisible();
 
@@ -71,10 +82,10 @@ public class CookingFatsController extends BaseNavigator {
                     eraSubList.setVisible(!isExpanded);
                     eraSubList.setManaged(!isExpanded);
 
-                    // Update the text helper dynamically
+                    // Update text helper
                     if (!isExpanded) {
                         countLabel.setText(entry.getValue() + " Recipes Total (Click to collapse)");
-                        mainRow.setStyle("-fx-background-color: rgba(92, 58, 33, 0.1);"); // Subtle highlight color when open
+                        mainRow.setStyle("-fx-background-color: rgba(92, 58, 33, 0.1);");
                     } else {
                         countLabel.setText(entry.getValue() + " Recipes Total (Click to expand)");
                         mainRow.setStyle("-fx-background-color: transparent;");

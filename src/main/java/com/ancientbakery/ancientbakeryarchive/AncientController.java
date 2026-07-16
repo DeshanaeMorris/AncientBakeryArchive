@@ -141,7 +141,7 @@ public class AncientController extends EraRecipeController {
         }
     }
 
-    // Handles the screen transition when clicking a search result in the sidebar
+    // Handles screen transition when clicking a search result in the sidebar
     private void navigateToRecipeEra(int recipeId, MouseEvent event) {
         RecipeRepository repo = new RecipeRepository();
         Recipe recipe = repo.findRecipeById(recipeId);
